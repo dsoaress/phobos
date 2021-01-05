@@ -1,4 +1,4 @@
-import connect from '../../utils/database'
+import connect from '../../../utils/database'
 
 export default async (req, res) => {
   // create blog post
@@ -20,6 +20,11 @@ export default async (req, res) => {
     })
 
     res.status(200).json(response.ops[0])
+  } else if (req.method === 'GET') {
+    const { db } = await connect('blog')
+    const response = await db.find({}).toArray()
+
+    res.status(200).json(response)
   } else {
     res.status(400).json({ error: 'Wrong request method' })
   }
