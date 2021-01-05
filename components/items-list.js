@@ -1,4 +1,7 @@
 import Image from 'next/image'
+import { parseISO, format } from 'date-fns'
+import { pt } from 'date-fns/locale'
+
 import Badge from './badge'
 
 export default function ItemsList({ data, title }) {
@@ -29,8 +32,10 @@ export default function ItemsList({ data, title }) {
             <div className="flex-grow">
               {item.title}
               {(item.date || item.role) && (
-                <span className="block text-xs font-normal text-gray-500 space-x-2">
-                  {item.date || item.role}{' '}
+                <span className="block text-xs font-normal text-gray-500">
+                  {format(parseISO(item.date), "d 'de' MMMM 'de' yyyy", {
+                    locale: pt
+                  }) || item.role}{' '}
                   {item.status && <Badge status={item.status} />}
                 </span>
               )}
