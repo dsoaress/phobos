@@ -1,3 +1,5 @@
+import slugify from 'slugify'
+
 import connect from '../../../utils/database'
 
 export default async (req, res) => {
@@ -10,9 +12,11 @@ export default async (req, res) => {
       return
     }
 
+    const slug = slugify(title, { lower: true })
     const { db } = await connect('blog')
     const response = await db.insertOne({
       title,
+      slug,
       date,
       status,
       image,
