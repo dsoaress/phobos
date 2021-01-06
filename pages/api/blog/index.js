@@ -7,7 +7,7 @@ export default async (req, res) => {
   if (req.method === 'POST') {
     const { title, date, status, image, body } = req.body
 
-    if (!title || !date || !status || !image || !body) {
+    if (!title || !date || !image || !body) {
       res.status(400).json({ error: 'Missing body parameter' })
       return
     }

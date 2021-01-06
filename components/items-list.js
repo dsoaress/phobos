@@ -20,7 +20,9 @@ export default function ItemsList({ data, title }) {
                   {format(parseISO(item.date), "d 'de' MMMM 'de' yyyy", {
                     locale: pt
                   }) || item.role}{' '}
-                  <Badge published={item.published} />
+                  {(item.status || item.status === null) && (
+                    <Badge status={item.status} />
+                  )}
                 </span>
               )}
             </div>

@@ -1,7 +1,7 @@
-export default function Badge({ published }) {
+export default function Badge({ status }) {
   return (
-    <span className={`badge ${published ? 'published' : 'draft'}`}>
-      {published ? 'Publicado' : 'Rascunho'}
+    <span className={`badge ${status === 'draft' ? 'draft' : 'published'}`}>
+      {status === 'draft' ? 'Rascunho' : 'Publicado'}
     </span>
   )
 }

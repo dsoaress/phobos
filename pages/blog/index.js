@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 
-import ItemsList from '../components/items-list'
-import api from '../utils/api'
+import ItemsList from '../../components/items-list'
+import api from '../../utils/api'
 
 export default function Blog() {
   const { data } = useSWR('/api/blog', api)
