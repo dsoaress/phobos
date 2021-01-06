@@ -1,48 +1,32 @@
-import Image from 'next/image'
+import Link from 'next/link'
 import { parseISO, format } from 'date-fns'
 import { pt } from 'date-fns/locale'
 
+import Thumbnail from './thumbnail'
 import Badge from './badge'
 
 export default function ItemsList({ data, title }) {
   return (
-    <div className="space-y-4">
-      {title && (
-        <h2 className="text-xl font-bold leading-tight text-gray-900">
-          {title}
-        </h2>
-      )}
-      <div className="shadow border-b border-gray-200 bg-white divide-y divide-gray-200">
+    <div className="items-list">
+      {title && <h2>{title}</h2>}
+      <div className="wrapper">
         {data.map(item => (
-          <div
-            className="flex items-center px-6 py-4 space-x-4 text-sm font-medium"
-            key={item._id}
-          >
-            {item.image && (
-              <div className="relative flex-shrink-0 h-10 w-10">
-                <Image
-                  className="rounded-full"
-                  src={item.image}
-                  alt={item.name}
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-            )}
-            <div className="flex-grow">
+          <div className="item" key={item._id}>
+            {item.image && <Thumbnail src={item.image} alt={item.title} />}
+            <div className="title">
               {item.title}
               {(item.date || item.role) && (
-                <span className="block text-xs font-normal text-gray-500">
+                <span className="meta">
                   {format(parseISO(item.date), "d 'de' MMMM 'de' yyyy", {
                     locale: pt
                   }) || item.role}{' '}
-                  {item.status && <Badge status={item.status} />}
+                  <Badge published={item.published} />
                 </span>
               )}
             </div>
-            <a href="#" className="text-indigo-600 hover:text-indigo-900">
-              Editar
-            </a>
+            <Link href={`/blog/${item._id}`}>
+              <a>Editar</a>
+            </Link>
           </div>
         ))}
       </div>
