@@ -9,6 +9,7 @@
     "format": "prettier --write \"**/*.{js,json,md,yml}\""
   },
   "dependencies": {
+    "@agney/react-loading": "^0.1.2",
     "@tailwindcss/forms": "^0.2.1",
     "autoprefixer": "^10.1.0",
     "axios": "^0.21.1",

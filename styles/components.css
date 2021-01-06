@@ -4,33 +4,67 @@
   .container {
     @apply max-w-5xl;
   }
+
+  .header nav {
+    @apply bg-gray-800;
+  }
+  .header .wrapper {
+    @apply container md:flex items-center justify-between py-4;
+  }
+  .header .logo {
+    @apply flex items-center space-x-4 md:space-x-0;
+  }
+  .header .menu-toggle {
+    @apply md:hidden bg-gray-800 p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white;
+  }
+  .header .menu {
+    @apply md:flex space-y-2 md:space-y-0 md:space-x-4 mt-4 md:mt-0;
+  }
+  .header a.nav-link {
+    @apply text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-sm font-medium;
+  }
+  .header .active {
+    @apply bg-gray-900 text-white;
+  }
+  .header .logout {
+    @apply py-2 md:p-0 border-t border-gray-700 md:pt-0 md:border-none;
+  }
+  .header header {
+    @apply bg-white shadow mb-8;
+  }
+  .header header div {
+    @apply container py-6;
+  }
+
   .items-list {
     @apply space-x-4;
-    .wrapper {
-      @apply shadow border-b border-gray-200 bg-white divide-y divide-gray-200;
-    }
-    .item {
-      @apply flex items-center px-6 py-4 space-x-4 text-sm font-medium;
-    }
-    .title {
-      @apply flex-grow;
-    }
-    .meta {
-      @apply block text-xs font-normal text-gray-500;
-    }
-    a {
-      @apply text-indigo-600 hover:text-indigo-900;
-    }
   }
+  .items-list .wrapper {
+    @apply rounded-md shadow border-b border-gray-200 bg-white divide-y divide-gray-200;
+  }
+  .items-list .item {
+    @apply flex items-center px-6 py-4 space-x-4 text-sm font-medium;
+  }
+  .items-list .title {
+    @apply flex-grow;
+  }
+  .items-list .meta {
+    @apply block text-xs font-normal text-gray-500;
+  }
+  .items-list a {
+    @apply text-indigo-600 hover:text-indigo-900;
+  }
+
   .badge {
     @apply px-1.5 inline-flex text-xs leading-5 rounded-full;
-    &.published {
-      @apply bg-green-100 text-green-800;
-    }
-    &.draft {
-      @apply bg-yellow-100 text-yellow-800;
-    }
   }
+  .badge.published {
+    @apply bg-green-100 text-green-800;
+  }
+  .badge.draft {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+
   .thumbnail {
     @apply relative flex-shrink-0 h-10 w-10;
   }
