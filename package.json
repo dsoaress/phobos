@@ -31,7 +31,7 @@
     "mongodb": "^3.6.3"
   },
   "resolutions": {
-    "typeorm": "0.2.28"
+    "typeorm": "0.2.29"
   },
   "prettier": {
     "trailingComma": "none",
