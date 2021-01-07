@@ -68,4 +68,21 @@
   .thumbnail {
     @apply relative flex-shrink-0 h-10 w-10;
   }
+
+  .authentication-wrapper {
+    @apply min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8;
+  }
+  .authentication-wrapper .wrapper {
+    @apply max-w-md w-full -mt-20 space-y-8;
+  }
+  .authentication-wrapper img {
+    @apply mx-auto h-12 w-auto;
+  }
+  .authentication-wrapper h2 {
+    @apply mt-6 text-center;
+  }
+
+  .splash-screen {
+    @apply absolute inset-0 flex justify-center items-center;
+  }
 }
