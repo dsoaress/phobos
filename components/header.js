@@ -39,10 +39,14 @@ export default function Header({ title }) {
           </div>
           <div className={`${menuOpen ? 'block' : 'hidden'} menu`}>
             <ActiveLink activeClassName="active" href="/blog">
-              <a className="nav-link">Blog</a>
+              <a className="nav-link" onClick={() => setMenuOpen(!menuOpen)}>
+                Blog
+              </a>
             </ActiveLink>
             <ActiveLink activeClassName="active" href="/pages">
-              <a className="nav-link">Páginas</a>
+              <a className="nav-link" onClick={() => setMenuOpen(!menuOpen)}>
+                Páginas
+              </a>
             </ActiveLink>
             <div className="logout">
               <ActiveLink href="">
@@ -53,7 +57,12 @@ export default function Header({ title }) {
             </div>
             <ActiveLink href="/blog/new-post">
               <a>
-                <button className="small w-full">Novo post</button>
+                <button
+                  className="small w-full"
+                  onClick={() => setMenuOpen(!menuOpen)}
+                >
+                  Novo post
+                </button>
               </a>
             </ActiveLink>
           </div>
