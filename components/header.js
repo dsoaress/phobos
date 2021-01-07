@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { signOut } from 'next-auth/client'
 
 import ActiveLink from './active-link'
 
@@ -44,8 +45,10 @@ export default function Header({ title }) {
               <a className="nav-link">Páginas</a>
             </ActiveLink>
             <div className="logout">
-              <ActiveLink href="#">
-                <a className="nav-link">Sair</a>
+              <ActiveLink href="">
+                <a onClick={signOut} className="nav-link">
+                  Sair
+                </a>
               </ActiveLink>
             </div>
             <ActiveLink href="/blog/new-post">

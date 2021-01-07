@@ -1,23 +1,23 @@
 import connect from '../../utils/database'
 
 export default async (req, res) => {
-  // create user
   if (req.method === 'POST') {
-    const { title, role, image } = req.body
+    const email = req.body.email
 
-    if (!title || !role || !image) {
-      res.status(400).json({ error: 'Missing body parameter' })
+    if (!email) {
+      res.status(400).json({ error: 'Missing email on request body' })
       return
     }
 
     const { db } = await connect('users')
-    const response = await db.insertOne({
-      title,
-      role,
-      image
-    })
+    const response = await db.findOne({ email })
 
-    res.status(200).json(response.ops[0])
+    if (!response) {
+      res.status(204).json({ error: 'User not found' })
+      return
+    }
+
+    res.status(200).json(response)
   } else {
     res.status(400).json({ error: 'Wrong request method' })
   }
