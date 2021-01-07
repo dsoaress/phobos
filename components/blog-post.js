@@ -2,7 +2,7 @@ import { Input, Checkbox, Textarea } from './input'
 
 export default function BlogPost({ onSubmit, onChange, message, loading }) {
   return (
-    <form onSubmit={onSubmit} className="container space-y-4 pt-10">
+    <form onSubmit={onSubmit} className="container space-y-4 mt-8">
       <Input
         type="text"
         id="title"

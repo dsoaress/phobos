@@ -60,11 +60,13 @@ export default function Header({ title }) {
         </div>
       </nav>
 
-      <header>
-        <div>
-          <h1>{title}</h1>
-        </div>
-      </header>
+      {title && (
+        <header>
+          <div>
+            <h1>{title}</h1>
+          </div>
+        </header>
+      )}
     </div>
   )
 }

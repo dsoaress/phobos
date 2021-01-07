@@ -1,7 +1,8 @@
 import axios from 'axios'
 
-import useForm from '../../hooks/use-form'
+import Layout from '../../components/layout'
 import BlogPost from '../../components/blog-post'
+import useForm from '../../hooks/use-form'
 
 export default function NewPost() {
   const [{ values, message, loading }, handleChange, handleSubmit] = useForm()
@@ -11,11 +12,13 @@ export default function NewPost() {
   }
 
   return (
-    <BlogPost
-      onSubmit={handleSubmit(savePost)}
-      onChange={handleChange}
-      message={message}
-      loading={loading}
-    />
+    <Layout>
+      <BlogPost
+        onSubmit={handleSubmit(savePost)}
+        onChange={handleChange}
+        message={message}
+        loading={loading}
+      />
+    </Layout>
   )
 }

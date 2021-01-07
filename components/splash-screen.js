@@ -1,19 +1,9 @@
-import { useLoading, TailSpin } from '@agney/react-loading'
-
-import Head from './head'
+import Spinner from './spinner'
 
 export default function SplashScreen() {
-  const { containerProps, indicatorEl } = useLoading({
-    loading: true,
-    indicator: <TailSpin width="50" />
-  })
-
   return (
-    <>
-      <Head />
-      <div className="flex justify-center items-center bg-indigo-800 h-screen w-screen">
-        <section {...containerProps}>{indicatorEl}</section>
-      </div>
-    </>
+    <div className="absolute inset-0 flex justify-center items-center">
+      <Spinner className="w-20" fill="#4f46e5" />
+    </div>
   )
 }
