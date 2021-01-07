@@ -3,7 +3,7 @@ import Router from 'next/router'
 import dynamic from 'next/dynamic'
 import { useSession } from 'next-auth/client'
 
-import Head from './head'
+import Meta from './meta'
 import Header from './header'
 
 const SplashScreen = dynamic(() => import('./splash-screen'))
@@ -35,7 +35,7 @@ export default function Layout({ children, title }) {
 
   return (
     <>
-      <Head />
+      <Meta />
       <Header title={title} />
       <main>{routeLoading ? <SplashScreen /> : children}</main>
     </>

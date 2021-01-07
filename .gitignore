@@ -9,6 +9,8 @@ coverage
 # next.js
 .next/
 out/
+sw.js
+workbox*.js
 
 # misc
 .DS_Store
