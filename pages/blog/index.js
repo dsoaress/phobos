@@ -13,7 +13,7 @@ export default function Blog(props) {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const { data } = await api(`${process.env.NEXT_PUBLIC_URL}/api/blog`)
 
   return { props: { data } }
