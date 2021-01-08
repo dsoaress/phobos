@@ -6,6 +6,7 @@ import api from '../../utils/api'
 
 export default function Blog(props) {
   const { data } = useSWR('/api/blog', api, { initialData: props })
+
   return (
     <Layout title="Blog">
       <div className="container">{data && <ItemsList data={data.data} />}</div>
@@ -14,7 +15,7 @@ export default function Blog(props) {
 }
 
 export async function getServerSideProps() {
-  const { data } = await api(`${process.env.NEXT_PUBLIC_URL}/api/blog`)
+  const { data } = await api(`${process.env.WEB_URI}/api/blog`)
 
   return { props: { data } }
 }

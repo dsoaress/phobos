@@ -8,7 +8,7 @@ export default function NewPost() {
   const [{ values, message, loading }, handleChange, handleSubmit] = useForm()
 
   const savePost = async () => {
-    await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/blog`, values)
+    await axios.post(`${process.env.WEB_URI}/api/blog`, values)
   }
 
   return (

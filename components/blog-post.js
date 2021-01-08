@@ -1,4 +1,4 @@
-import { Input, Checkbox, Textarea } from './input'
+import { Input, Checkbox, Textarea } from '@/components/input'
 
 export default function BlogPost({ onSubmit, onChange, message, loading }) {
   return (

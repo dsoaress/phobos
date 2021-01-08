@@ -60,7 +60,7 @@ export default function BlogPost(props) {
 
 export async function getServerSideProps(context) {
   const _id = context.query._id
-  const response = await api(`${process.env.NEXT_PUBLIC_URL}/api/blog/${_id}`)
+  const response = await api(`${process.env.WEB_URI}/api/blog/${_id}`)
   const post = response.data
 
   return {

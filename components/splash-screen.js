@@ -1,4 +1,4 @@
-import Spinner from './spinner'
+import Spinner from '@/components/spinner'
 
 export default function SplashScreen() {
   return (

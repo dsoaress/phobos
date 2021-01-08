@@ -2,8 +2,8 @@ import Link from 'next/link'
 import { parseISO, format } from 'date-fns'
 import { pt } from 'date-fns/locale'
 
-import Thumbnail from './thumbnail'
-import Badge from './badge'
+import Thumbnail from '@/components/thumbnail'
+import Badge from '@/components/badge'
 
 export default function ItemsList({ data, title }) {
   return (

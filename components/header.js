@@ -1,10 +1,17 @@
 import { useState } from 'react'
-import { signOut } from 'next-auth/client'
 
-import ActiveLink from './active-link'
+import ActiveLink from '@/components/active-link'
+import { useCurrentUser } from '@/hooks'
 
 export default function Header({ title }) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [, { mutate }] = useCurrentUser()
+  const handleLogout = async () => {
+    await fetch('/api/auth', {
+      method: 'DELETE'
+    })
+    mutate(null)
+  }
   return (
     <div className="header">
       <nav>
@@ -49,8 +56,8 @@ export default function Header({ title }) {
               </a>
             </ActiveLink>
             <div className="logout">
-              <ActiveLink href="">
-                <a onClick={signOut} className="nav-link">
+              <ActiveLink href="#">
+                <a onClick={handleLogout} className="nav-link">
                   Sair
                 </a>
               </ActiveLink>

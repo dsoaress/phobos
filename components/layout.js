@@ -1,37 +1,34 @@
 import { useEffect, useState } from 'react'
-import Router from 'next/router'
-import dynamic from 'next/dynamic'
-import { useSession } from 'next-auth/client'
+import { useRouter } from 'next/router'
 
-import Meta from './meta'
-import Header from './header'
-
-const SplashScreen = dynamic(() => import('./splash-screen'))
-
-const Login = dynamic(() => import('./login'))
+import Meta from '@/components/meta'
+import Header from '@/components/header'
+import SplashScreen from '@/components/splash-screen'
+import { useCurrentUser } from '@/hooks'
 
 export default function Layout({ children, title }) {
-  const [session, loading] = useSession()
+  const [user] = useCurrentUser()
   const [routeLoading, setRouteLoading] = useState(false)
+  const router = useRouter()
+
   useEffect(() => {
+    // todo: fix redirect
+    !user && router.push('/login')
     const start = () => {
       setRouteLoading(true)
     }
     const end = () => {
       setRouteLoading(false)
     }
-    Router.events.on('routeChangeStart', start)
-    Router.events.on('routeChangeComplete', end)
-    Router.events.on('routeChangeError', end)
+    router.events.on('routeChangeStart', start)
+    router.events.on('routeChangeComplete', end)
+    router.events.on('routeChangeError', end)
     return () => {
-      Router.events.off('routeChangeStart', start)
-      Router.events.off('routeChangeComplete', end)
-      Router.events.off('routeChangeError', end)
+      router.events.off('routeChangeStart', start)
+      router.events.off('routeChangeComplete', end)
+      router.events.off('routeChangeError', end)
     }
   }, [])
-
-  if (typeof window !== 'undefined' && loading) return <SplashScreen />
-  if (!session) return <Login />
 
   return (
     <>
