@@ -8,8 +8,14 @@
     "start": "next start -p 3010"
   },
   "dependencies": {
+    "autoprefixer": "^10.1.0",
     "next": "10.0.5",
+    "postcss": "^8.2.3",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "react-icons": "^4.1.0",
+    "tailwindcss": "^2.0.2",
+    "typeface-anton": "^1.1.13",
+    "typeface-roboto": "^1.1.13"
   }
 }
