@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useCurrentUser } from '@/hooks'
 
+import { useCurrentUser } from '@/hooks'
 import AuthenticationWrapper from '@/components/authentication-wrapper'
 import { Input } from '@/components/input'
 import Spinner from '@/components/spinner'

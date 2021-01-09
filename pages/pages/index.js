@@ -1,20 +1,21 @@
 import useSWR from 'swr'
+import axios from 'axios'
 
 import Layout from '../../components/layout'
 import ItemsList from '../../components/items-list'
-import api from '../../utils/api'
+import fetcher from '@/lib/fetch'
 
 export default function Pages(props) {
-  const { data } = useSWR('/api/pages', api, { initialData: props })
+  const { data } = useSWR('/api/pages', fetcher, { initialData: props.data })
   return (
     <Layout title="Páginas">
-      <div className="container">{data && <ItemsList data={data.data} />}</div>
+      <div className="container">{data && <ItemsList data={data.pages} />}</div>
     </Layout>
   )
 }
 
 export async function getServerSideProps() {
-  const { data } = await api(`${process.env.WEB_URI}/api/pages`)
+  const { data } = await axios.get(`${process.env.WEB_URI}/api/pages`)
 
   return { props: { data } }
 }

@@ -3,17 +3,16 @@ import { useRouter } from 'next/router'
 
 import Meta from '@/components/meta'
 import Header from '@/components/header'
+import LoginScreen from '@/components/login-screen'
 import SplashScreen from '@/components/splash-screen'
 import { useCurrentUser } from '@/hooks'
 
-export default function Layout({ children, title }) {
+export default function Layout({ children, postId, title }) {
   const [user] = useCurrentUser()
   const [routeLoading, setRouteLoading] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
-    // todo: fix redirect
-    !user && router.push('/login')
     const start = () => {
       setRouteLoading(true)
     }
@@ -30,10 +29,13 @@ export default function Layout({ children, title }) {
     }
   }, [])
 
+  if (!user) {
+    return <LoginScreen />
+  }
   return (
     <>
       <Meta />
-      <Header title={title} />
+      <Header title={title} postId={postId} />
       <main>{routeLoading ? <SplashScreen /> : children}</main>
     </>
   )

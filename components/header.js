@@ -1,17 +1,30 @@
 import { useState } from 'react'
+import axios from 'axios'
+import { useRouter } from 'next/router'
 
 import ActiveLink from '@/components/active-link'
 import { useCurrentUser } from '@/hooks'
 
-export default function Header({ title }) {
+export default function Header({ postId, title }) {
+  const router = useRouter()
   const [menuOpen, setMenuOpen] = useState(false)
   const [, { mutate }] = useCurrentUser()
+
   const handleLogout = async () => {
     await fetch('/api/auth', {
       method: 'DELETE'
     })
     mutate(null)
+    router.push('/login')
   }
+
+  const handleDelete = async () => {
+    await axios.delete('/api/blog', {
+      data: { _id: postId }
+    })
+    router.push('/blog')
+  }
+
   return (
     <div className="header">
       <nav>
@@ -56,22 +69,19 @@ export default function Header({ title }) {
               </a>
             </ActiveLink>
             <div className="logout">
-              <ActiveLink href="#">
-                <a onClick={handleLogout} className="nav-link">
-                  Sair
-                </a>
-              </ActiveLink>
-            </div>
-            <ActiveLink href="/blog/new-post">
-              <a>
-                <button
-                  className="small w-full"
-                  onClick={() => setMenuOpen(!menuOpen)}
-                >
-                  Novo post
-                </button>
+              <a onClick={handleLogout} className="nav-link cursor-pointer">
+                Sair
               </a>
-            </ActiveLink>
+            </div>
+            <button
+              onClick={
+                postId ? handleDelete : () => router.push('/blog/new-post')
+              }
+              className={`small w-full ${postId && 'danger'}`}
+              disabled={router.pathname === '/blog/new-post' && !postId}
+            >
+              {postId ? 'Excluir post' : 'Novo post'}
+            </button>
           </div>
         </div>
       </nav>

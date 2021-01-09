@@ -48,6 +48,9 @@
   .items-list .title {
     @apply flex-grow;
   }
+  .items-list .title a {
+    @apply text-gray-800;
+  }
   .items-list .meta {
     @apply block text-xs font-normal text-gray-500;
   }
@@ -84,5 +87,21 @@
 
   .splash-screen {
     @apply absolute inset-0 flex justify-center items-center;
+  }
+
+  .quill {
+    @apply rounded-md;
+  }
+  .quill .ql-toolbar.ql-snow {
+    @apply rounded-t-md bg-white border-gray-300 font-sans py-4;
+  }
+  .quill .ql-container.ql-snow {
+    @apply rounded-b-md font-sans bg-white border-gray-300;
+  }
+  .quill .ql-editor {
+    @apply h-96 text-base;
+  }
+  .quill .ql-editor p {
+    @apply mb-4 leading-6;
   }
 }

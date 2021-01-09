@@ -42,7 +42,3 @@ export async function getServerSideProps(ctx) {
 
   return { props: { success: true } }
 }
-
-;<span className="block rounded-md bg-red-100 text-red-800 text-center p-4">
-  O link está expirado
-</span>

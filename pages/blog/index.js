@@ -1,21 +1,26 @@
 import useSWR from 'swr'
+import axios from 'axios'
 
 import Layout from '../../components/layout'
 import ItemsList from '../../components/items-list'
-import api from '../../utils/api'
+import fetcher from '@/lib/fetch'
 
 export default function Blog(props) {
-  const { data } = useSWR('/api/blog', api, { initialData: props })
-
+  const { data } = useSWR(
+    '/api/blog',
+    fetcher,
+    { refreshInterval: 1000 },
+    { initialData: props.data }
+  )
   return (
     <Layout title="Blog">
-      <div className="container">{data && <ItemsList data={data.data} />}</div>
+      <div className="container">{data && <ItemsList data={data.posts} />}</div>
     </Layout>
   )
 }
 
 export async function getServerSideProps() {
-  const { data } = await api(`${process.env.WEB_URI}/api/blog`)
+  const { data } = await axios.get(`${process.env.WEB_URI}/api/blog`)
 
   return { props: { data } }
 }

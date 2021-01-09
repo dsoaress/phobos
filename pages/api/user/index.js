@@ -1,12 +1,14 @@
 import nc from 'next-connect'
 import multer from 'multer'
 import { v2 as cloudinary } from 'cloudinary'
+
 import { all } from '@/middlewares'
 import { updateUserById } from '@/db'
 import { extractUser } from '@/lib/api-helpers'
 
 const upload = multer({ dest: '/tmp' })
 const handler = nc()
+handler.use(all)
 
 const {
   hostname: cloud_name,
@@ -19,8 +21,6 @@ cloudinary.config({
   api_key,
   api_secret
 })
-
-handler.use(all)
 
 handler.get(async (req, res) => {
   // filter out password
@@ -43,11 +43,10 @@ handler.patch(upload.single('profilePicture'), async (req, res) => {
     })
     profilePicture = image.secure_url
   }
-  const { name, bio } = req.body
+  const { name } = req.body
 
   const user = await updateUserById(req.db, req.user._id, {
     ...(name && { name }),
-    ...(typeof bio === 'string' && { bio }),
     ...(profilePicture && { profilePicture })
   })
 

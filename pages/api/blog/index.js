@@ -1,35 +1,97 @@
-import slugify from 'slugify'
+import nc from 'next-connect'
+import multer from 'multer'
+import { v2 as cloudinary } from 'cloudinary'
 
-import connect from '../../../utils/database'
+import { all } from '@/middlewares'
+import {
+  deleteBlogPost,
+  getBlogPosts,
+  insertBlogPost,
+  updateBlogPost
+} from '@/db'
 
-export default async (req, res) => {
-  // create blog post
-  if (req.method === 'POST') {
-    const { title, date, status, image, body } = req.body
+const upload = multer({ dest: '/tmp' })
+const handler = nc()
+handler.use(all)
 
-    if (!title || !date || !image || !body) {
-      res.status(400).json({ error: 'Missing body parameter' })
-      return
-    }
+const {
+  hostname: cloud_name,
+  username: api_key,
+  password: api_secret
+} = new URL(process.env.CLOUDINARY_URI)
 
-    const slug = slugify(title, { lower: true })
-    const { db } = await connect('blog')
-    const response = await db.insertOne({
-      title,
-      slug,
-      date,
-      status,
-      image,
-      body
-    })
+cloudinary.config({
+  cloud_name,
+  api_key,
+  api_secret
+})
 
-    res.status(200).json(response.ops[0])
-  } else if (req.method === 'GET') {
-    const { db } = await connect('blog')
-    const response = await db.find({}).toArray()
-
-    res.status(200).json(response)
-  } else {
-    res.status(400).json({ error: 'Wrong request method' })
+handler.delete(async (req, res) => {
+  const { _id } = req.body
+  if (!req.user) {
+    return res.status(401).send('You need to be authenticated')
   }
-}
+
+  const post = await deleteBlogPost(req.db, {
+    _id,
+    userId: req.user._id
+  })
+
+  return res.json({ post })
+})
+
+handler.get(async (req, res) => {
+  const posts = await getBlogPosts(req.db)
+  res.send({ posts })
+})
+
+handler.post(upload.single('image'), async (req, res) => {
+  const { body, date, image, status, title } = req.body
+  if (!req.user) {
+    return res.status(401).send('You need to be authenticated')
+  }
+
+  if (!body || !date || !image || !title) {
+    res.status(400).json({ error: 'Missing body parameter' })
+    return
+  }
+
+  // const imageUpload = await cloudinary.uploader.upload(req.file.path)
+
+  const post = await insertBlogPost(req.db, {
+    body,
+    date,
+    image,
+    status,
+    title,
+    userId: req.user._id
+  })
+
+  return res.json({ post })
+})
+
+handler.patch(async (req, res) => {
+  const { _id, body, date, image, status, title } = req.body
+  if (!req.user) {
+    return res.status(401).send('You need to be authenticated')
+  }
+
+  if (!body || !date || !image || !title) {
+    res.status(400).json({ error: 'Missing body parameter' })
+    return
+  }
+
+  const post = await updateBlogPost(req.db, {
+    _id,
+    body,
+    date,
+    image,
+    status,
+    title,
+    userId: req.user._id
+  })
+
+  return res.json({ post })
+})
+
+export default handler
