@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev -p 3010",
     "build": "next build",
-    "start": "next start -p 3010"
+    "start": "next start -p 3010",
+    "format": "prettier --write \"**/*.{js,json,md,yml}\""
   },
   "dependencies": {
     "autoprefixer": "^10.1.0",
@@ -17,5 +18,8 @@
     "tailwindcss": "^2.0.2",
     "typeface-anton": "^1.1.13",
     "typeface-roboto": "^1.1.13"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
   }
 }

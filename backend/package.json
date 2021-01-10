@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "format": "prettier --write \"**/*.{js,json,md,yml}\""
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.2.1",
@@ -32,6 +33,9 @@
     "swr": "^0.4.0",
     "tailwindcss": "^2.0.2",
     "validator": "^13.5.2"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
   },
   "peerOptionalDependencies": {
     "mongodb": "^3.6.3"
