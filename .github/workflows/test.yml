@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: 12.x
 
-      - name: Install dependencies
-        run: yarn --frozen-lockfile
+      - name: Test backend
+        run: cd backend && yarn --frozen-lockfile && yarn build
 
-      - name: Test
-        run: yarn build:backend && yarn build:frontend
+      - name: Test frontend
+        run: cd frontend && yarn --frozen-lockfile && yarn build
