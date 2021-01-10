@@ -1,10 +1,10 @@
 import Link from 'next/link'
 
-import AuthenticationWrapper from '@/components/authentication-wrapper'
+import LoginWrapper from '@/components/login-wrapper'
 
 export default function Login() {
   return (
-    <AuthenticationWrapper title="Você não está logado">
+    <LoginWrapper title="Você não está logado">
       <div>
         <Link href="/login">
           <a>
@@ -12,6 +12,6 @@ export default function Login() {
           </a>
         </Link>
       </div>
-    </AuthenticationWrapper>
+    </LoginWrapper>
   )
 }

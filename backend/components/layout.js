@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import Meta from '@/components/meta'
 import Header from '@/components/header'
 import LoginScreen from '@/components/login-screen'
-import SplashScreen from '@/components/splash-screen'
+import SpinnerScreen from '@/components/spinner-screen'
 import { useCurrentUser } from '@/hooks'
 
 export default function Layout({ children, postId, title }) {
@@ -36,7 +36,7 @@ export default function Layout({ children, postId, title }) {
     <>
       <Meta />
       <Header title={title} postId={postId} />
-      <main>{routeLoading ? <SplashScreen /> : children}</main>
+      <main>{routeLoading ? <SpinnerScreen /> : children}</main>
     </>
   )
 }

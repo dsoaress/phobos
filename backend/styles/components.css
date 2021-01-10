@@ -72,20 +72,37 @@
     @apply relative flex-shrink-0 h-10 w-10;
   }
 
-  .authentication-wrapper {
+  .login-wrapper {
     @apply min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 text-sm text-center;
   }
-  .authentication-wrapper .wrapper {
+  .login-wrapper .wrapper {
     @apply max-w-md w-full -mt-20 space-y-8;
   }
-  .authentication-wrapper img {
+  .login-wrapper img {
     @apply mx-auto h-12 w-auto;
   }
-  .authentication-wrapper h2 {
+  .login-wrapper h2 {
     @apply mt-6;
   }
 
-  .splash-screen {
+  .alert {
+    @apply h-14;
+  }
+
+  .alert span {
+    @apply block rounded-md text-center p-4;
+  }
+  .alert .success {
+    @apply bg-green-100 text-green-800;
+  }
+  .alert .warning {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+  .alert .danger {
+    @apply bg-red-100 text-red-800;
+  }
+
+  .spinner-screen {
     @apply absolute inset-0 flex justify-center items-center;
   }
 

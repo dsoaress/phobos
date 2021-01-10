@@ -3,9 +3,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { useCurrentUser } from '@/hooks'
-import AuthenticationWrapper from '@/components/authentication-wrapper'
-import { Input } from '@/components/input'
-import Spinner from '@/components/spinner'
+import LoginWrapper from '@/components/login-wrapper'
+import { Email, Password } from '@/components/login-inputs'
+import SpinnerButton from '@/components/spinner-button'
+import Alert from '@/components/alert'
 
 const LoginPage = () => {
   const router = useRouter()
@@ -19,6 +20,8 @@ const LoginPage = () => {
   async function handleSubmit(e) {
     e.preventDefault()
     setLoading(true)
+    setErrorMsg('')
+
     const body = {
       email: e.currentTarget.email.value,
       password: e.currentTarget.password.value
@@ -38,24 +41,11 @@ const LoginPage = () => {
   }
 
   return (
-    <AuthenticationWrapper title="Digite seu email">
+    <LoginWrapper title="Digite seu email">
       <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-        <Input type="email" id="email" label="Email" labelSrOnly required />
-        <Input
-          type="password"
-          id="password"
-          label="Senha"
-          labelSrOnly
-          required
-        />
-        <div>
-          <button type="submit" className="relative w-full">
-            {loading && (
-              <Spinner className="absolute left-4 top-4 fill-current w-5" />
-            )}
-            Entrar
-          </button>
-        </div>
+        <Email />
+        <Password />
+        <SpinnerButton label="Entrar" loading={loading} />
         <div>
           <Link href="/forget-password">
             <a>
@@ -64,14 +54,10 @@ const LoginPage = () => {
           </Link>
         </div>
         <div className="h-14">
-          {errorMsg && (
-            <span className="block rounded-md bg-red-100 text-red-800 text-center p-4">
-              {errorMsg}
-            </span>
-          )}
+          {errorMsg && <Alert label={errorMsg} className="danger" />}
         </div>
       </form>
-    </AuthenticationWrapper>
+    </LoginWrapper>
   )
 }
 

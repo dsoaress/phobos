@@ -3,21 +3,21 @@ import nc from 'next-connect'
 import { all } from '@/middlewares'
 import { updateUserById, findAndDeleteTokenByIdAndType } from '@/db'
 
-import AuthenticationWrapper from '@/components/authentication-wrapper'
+import LoginWrapper from '@/components/login-wrapper'
+import Alert from '@/components/alert'
 
 export default function EmailVerifyPage({ success }) {
   return (
-    <AuthenticationWrapper>
+    <LoginWrapper>
       {success ? (
-        <span className="block rounded-md bg-red-100 text-red-800 text-center p-4">
-          Obrigado por verificar seu email, você pode fechar essa janela
-        </span>
+        <Alert
+          label="Obrigado por verificar seu email, você pode fechar essa janela"
+          className="success"
+        />
       ) : (
-        <span className="block rounded-md bg-red-100 text-red-800 text-center p-4">
-          O link está expirado
-        </span>
+        <Alert label="O link está expirado" className="danger" />
       )}
-    </AuthenticationWrapper>
+    </LoginWrapper>
   )
 }
 

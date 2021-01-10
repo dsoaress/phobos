@@ -15,7 +15,7 @@ export default function Pages(props) {
 }
 
 export async function getServerSideProps() {
-  const { data } = await axios.get(`${process.env.WEB_URI}/api/pages`)
+  const { data } = await axios.get(`${process.env.WEB_URL}/api/pages`)
 
   return { props: { data } }
 }

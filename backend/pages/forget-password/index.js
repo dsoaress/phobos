@@ -1,8 +1,9 @@
 import { useState } from 'react'
 
-import AuthenticationWrapper from '@/components/authentication-wrapper'
-import { Input } from '@/components/input'
-import Spinner from '@/components/spinner'
+import LoginWrapper from '@/components/login-wrapper'
+import { Email } from '@/components/login-inputs'
+import SpinnerButton from '@/components/spinner-button'
+import Alert from '@/components/alert'
 
 const ForgetPasswordPage = () => {
   const [msg, setMsg] = useState('')
@@ -12,6 +13,8 @@ const ForgetPasswordPage = () => {
   async function handleSubmit(e) {
     e.preventDefault(e)
     setLoading(true)
+    setMsg('')
+    setErrorMsg('')
 
     const body = {
       email: e.currentTarget.email.value
@@ -32,31 +35,16 @@ const ForgetPasswordPage = () => {
   }
 
   return (
-    <AuthenticationWrapper title="Digite seu email para recuperar o acesso">
+    <LoginWrapper title="Digite seu email para recuperar o acesso">
       <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-        <Input type="email" id="email" label="Email" labelSrOnly required />
-        <div>
-          <button type="submit" className="relative w-full">
-            {loading && (
-              <Spinner className="absolute left-4 top-4 fill-current w-5" />
-            )}
-            Enviar
-          </button>
-        </div>
+        <Email />
+        <SpinnerButton label="Enviar" loading={loading} />
         <div className="h-14">
-          {msg && (
-            <span className="block rounded-md bg-green-100 text-green-800 text-center p-4">
-              {msg}
-            </span>
-          )}
-          {errorMsg && (
-            <span className="block rounded-md bg-red-100 text-red-800 text-center p-4">
-              {errorMsg}
-            </span>
-          )}
+          {msg && <Alert label={msg} className="success" />}
+          {errorMsg && <Alert label={errorMsg} className="warning" />}
         </div>
       </form>
-    </AuthenticationWrapper>
+    </LoginWrapper>
   )
 }
 

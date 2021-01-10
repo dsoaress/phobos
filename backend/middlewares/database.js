@@ -15,7 +15,7 @@ export async function createIndexes(db) {
 
 export default async function database(req, res, next) {
   if (!global.mongo.client) {
-    global.mongo.client = new MongoClient(process.env.MONGODB_URI, {
+    global.mongo.client = new MongoClient(process.env.MONGODB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })

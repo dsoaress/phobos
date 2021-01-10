@@ -15,7 +15,7 @@
     @apply text-xl;
   }
   label {
-    @apply text-xs text-gray-500 font-normal leading-8;
+    @apply block text-xs text-gray-500 font-normal leading-8;
   }
   input[type='text'],
   input[type='email'],

@@ -4,9 +4,10 @@ import Router from 'next/router'
 import { database } from '@/middlewares'
 import { findTokenByIdAndType } from '@/db'
 
-import AuthenticationWrapper from '@/components/authentication-wrapper'
-import { Input } from '@/components/input'
-import Spinner from '@/components/spinner'
+import LoginWrapper from '@/components/login-wrapper'
+import { Password } from '@/components/login-inputs'
+import SpinnerButton from '@/components/spinner-button'
+import Alert from '@/components/alert'
 
 const ResetPasswordTokenPage = ({ valid, token }) => {
   const [loading, setLoading] = useState(false)
@@ -28,33 +29,16 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
   }
 
   return (
-    <AuthenticationWrapper title={valid && 'Defina uma nova senha'}>
+    <LoginWrapper title={valid && 'Defina uma nova senha'}>
       {valid ? (
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <Input
-            type="password"
-            id="password"
-            label="Senha"
-            labelSrOnly
-            required
-          />
-          <div>
-            <button type="submit" className="relative w-full">
-              {loading && (
-                <Spinner className="absolute left-4 top-4 fill-current w-5" />
-              )}
-              Definir senha
-            </button>
-          </div>
+          <Password />
+          <SpinnerButton label="Definir senha" loading={loading} />
         </form>
       ) : (
-        <div className="h-14">
-          <span className="block rounded-md bg-red-100 text-red-800 text-center p-4">
-            O link está expirado
-          </span>
-        </div>
+        <Alert label="O link está expirado" className="danger" />
       )}
-    </AuthenticationWrapper>
+    </LoginWrapper>
   )
 }
 

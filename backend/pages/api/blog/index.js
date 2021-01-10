@@ -18,7 +18,13 @@ const {
   hostname: cloud_name,
   username: api_key,
   password: api_secret
-} = new URL(process.env.CLOUDINARY_URI)
+} = new URL(process.env.CLOUDINARY_URL)
+
+export const config = {
+  api: {
+    bodyParser: false
+  }
+}
 
 cloudinary.config({
   cloud_name,
@@ -46,22 +52,22 @@ handler.get(async (req, res) => {
 })
 
 handler.post(upload.single('image'), async (req, res) => {
-  const { body, date, image, status, title } = req.body
+  const { body, date, status, title } = req.body
   if (!req.user) {
     return res.status(401).send('You need to be authenticated')
   }
 
-  if (!body || !date || !image || !title) {
+  if (!body || !date || !req.file || !title) {
     res.status(400).json({ error: 'Missing body parameter' })
     return
   }
 
-  // const imageUpload = await cloudinary.uploader.upload(req.file.path)
+  const { secure_url } = await cloudinary.uploader.upload(req.file.path)
 
   const post = await insertBlogPost(req.db, {
     body,
     date,
-    image,
+    image: secure_url,
     status,
     title,
     userId: req.user._id

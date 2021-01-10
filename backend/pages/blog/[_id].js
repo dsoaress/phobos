@@ -8,7 +8,7 @@ export default function BlogPostPage(props) {
 
 export async function getServerSideProps(ctx) {
   const _id = ctx.query._id
-  const res = await axios.get(`${process.env.WEB_URI}/api/blog/${_id}`)
+  const res = await axios.get(`${process.env.WEB_URL}/api/blog/${_id}`)
   const post = res.data
 
   return {

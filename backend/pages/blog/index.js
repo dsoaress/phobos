@@ -20,7 +20,7 @@ export default function Blog(props) {
 }
 
 export async function getServerSideProps() {
-  const { data } = await axios.get(`${process.env.WEB_URI}/api/blog`)
+  const { data } = await axios.get(`${process.env.WEB_URL}/api/blog`)
 
   return { props: { data } }
 }

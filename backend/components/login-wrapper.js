@@ -1,9 +1,9 @@
 import Meta from '@/components/meta'
-export default function AuthenticationWrapper({ children, title }) {
+export default function LoginWrapper({ children, title }) {
   return (
     <>
       <Meta />
-      <div className="authentication-wrapper">
+      <div className="login-wrapper">
         <div className="wrapper">
           <div>
             <img

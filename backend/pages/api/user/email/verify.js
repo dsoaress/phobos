@@ -26,7 +26,7 @@ handler.post(async (req, res) => {
     html: `
       <div>
         <p>Olá, ${req.user.name}</p>
-        <p><a href="${process.env.WEB_URI}/verify-email/${token._id}">Clique aqui</a> para confirmar seu email.</p>
+        <p><a href="${process.env.WEB_URL}/verify-email/${token._id}">Clique aqui</a> para confirmar seu email.</p>
       </div>
       `
   }
