@@ -106,6 +106,14 @@
     @apply absolute inset-0 flex justify-center items-center;
   }
 
+  .post {
+    @apply container space-y-4 mt-8;
+  }
+
+  .post .image {
+    @apply relative h-40 w-40;
+  }
+
   .quill {
     @apply rounded-md;
   }

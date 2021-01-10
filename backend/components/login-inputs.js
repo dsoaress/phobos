@@ -1,3 +1,14 @@
+export function Name() {
+  return (
+    <div>
+      <label htmlFor="name" className="sr-only">
+        Nome
+      </label>
+      <input type="text" id="name" name="name" placeholder="Nome" required />
+    </div>
+  )
+}
+
 export function Email() {
   return (
     <div>

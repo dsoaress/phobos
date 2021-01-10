@@ -22,7 +22,7 @@ handler.post(async (req, res) => {
     return
   }
   if (await findUserByEmail(req.db, email)) {
-    res.status(403).send('The email has already been used.')
+    res.status(403).send('Já existe uma conta com o email informado')
     return
   }
   const hashedPassword = await bcrypt.hash(password, 10)
