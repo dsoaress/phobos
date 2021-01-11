@@ -16,11 +16,18 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-icons": "^4.1.0",
+    "styled-components": "^5.2.1",
     "tailwindcss": "^2.0.2",
+    "twin.macro": "^2.0.8",
     "typeface-anton": "^1.1.13",
     "typeface-roboto": "^1.1.13"
   },
   "devDependencies": {
     "prettier": "^2.2.1"
+  },
+  "babelMacros": {
+    "twin": {
+      "preset": "styled-components"
+    }
   }
 }

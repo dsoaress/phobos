@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import BlogPost from '@/components/blog-post'
+import BlogPost from '@/components/BlogPost'
 
 export default function BlogPostPage(props) {
   return <BlogPost {...props} />

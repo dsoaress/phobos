@@ -1,6 +1,15 @@
+import {
+  StyledComponentsGlobal,
+  TwinMacroGlobal
+} from '@/components/GlobalStyles'
 import 'react-quill/dist/quill.snow.css'
-import '../styles/globals.css'
 
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <TwinMacroGlobal />
+      <StyledComponentsGlobal />
+      <Component {...pageProps} />
+    </>
+  )
 }

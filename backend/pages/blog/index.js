@@ -1,8 +1,9 @@
 import useSWR from 'swr'
 import axios from 'axios'
+import tw from 'twin.macro'
 
-import Layout from '../../components/layout'
-import ItemsList from '../../components/items-list'
+import Layout from '@/components/Layout'
+import ItemsList from '@/components/ItemsList'
 import fetcher from '@/lib/fetch'
 
 export default function Blog(props) {
@@ -14,7 +15,7 @@ export default function Blog(props) {
   )
   return (
     <Layout title="Blog">
-      <div className="container">{data && <ItemsList data={data.posts} />}</div>
+      <div css={[tw`container`]}>{data && <ItemsList data={data.posts} />}</div>
     </Layout>
   )
 }

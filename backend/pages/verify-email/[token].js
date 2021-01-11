@@ -1,24 +1,25 @@
-import React from 'react'
+import { useState } from 'react'
 import nc from 'next-connect'
 import { all } from '@/middlewares'
 import { updateUserById, findAndDeleteTokenByIdAndType } from '@/db'
 
-import LoginWrapper from '@/components/login-wrapper'
-import Alert from '@/components/alert'
+import LoginForm from '@/components/LoginForm'
 
 export default function EmailVerifyPage({ success }) {
-  return (
-    <LoginWrapper>
-      {success ? (
-        <Alert
-          label="Obrigado por verificar seu email, você pode fechar essa janela"
-          className="success"
-        />
-      ) : (
-        <Alert label="O link está expirado" className="danger" />
-      )}
-    </LoginWrapper>
-  )
+  const [message, setMessage] = useState({})
+  success
+    ? setMessage({
+        label: 'Obrigado por verificar seu email, você pode fechar essa janela',
+        type: 'success',
+        show: true
+      })
+    : setMessage({
+        label: 'O link está expirado',
+        type: 'danger',
+        show: true
+      })
+
+  return <LoginForm message={message} />
 }
 
 export async function getServerSideProps(ctx) {

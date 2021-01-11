@@ -1,10 +1,9 @@
-const withPWA = require('next-pwa')
-const prod = process.env.NODE_ENV === 'production'
-
-module.exports = withPWA({
-  pwa: {
-    disable: prod ? false : true,
-    dest: 'public'
+module.exports = {
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.node = { fs: 'empty', module: 'empty' }
+    }
+    return config
   },
   async redirects() {
     return [
@@ -18,4 +17,4 @@ module.exports = withPWA({
   images: {
     domains: ['images.unsplash.com', 'res.cloudinary.com']
   }
-})
+}

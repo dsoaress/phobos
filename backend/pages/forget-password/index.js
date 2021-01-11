@@ -1,20 +1,15 @@
 import { useState } from 'react'
 
-import LoginWrapper from '@/components/login-wrapper'
-import { Email } from '@/components/login-inputs'
-import SpinnerButton from '@/components/spinner-button'
-import Alert from '@/components/alert'
+import LoginForm from '@/components/LoginForm'
 
 const ForgetPasswordPage = () => {
-  const [msg, setMsg] = useState('')
-  const [errorMsg, setErrorMsg] = useState('')
+  const [message, setMessage] = useState({})
   const [loading, setLoading] = useState(false)
 
   async function handleSubmit(e) {
     e.preventDefault(e)
     setLoading(true)
-    setMsg('')
-    setErrorMsg('')
+    setMessage({})
 
     const body = {
       email: e.currentTarget.email.value
@@ -27,24 +22,31 @@ const ForgetPasswordPage = () => {
     })
 
     if (res.status === 200) {
-      setMsg('Verifique sua caixa de entrada')
+      setMessage({
+        label: 'Verifique sua caixa de entrada',
+        type: 'success',
+        show: true
+      })
     } else {
-      setErrorMsg('Erro. Por favor, tente novamente')
+      setMessage({
+        label: 'Erro. Por favor, tente novamente',
+        type: 'danger',
+        show: true
+      })
     }
     setLoading(false)
   }
 
   return (
-    <LoginWrapper title="Digite seu email para recuperar o acesso">
-      <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-        <Email />
-        <SpinnerButton label="Enviar" loading={loading} />
-        <div className="h-14">
-          {msg && <Alert label={msg} className="success" />}
-          {errorMsg && <Alert label={errorMsg} className="warning" />}
-        </div>
-      </form>
-    </LoginWrapper>
+    <LoginForm
+      title="Digite seu email para recuperar o acesso"
+      email
+      buttonLabel="Enviar"
+      hasForgatPassword={false}
+      message={message}
+      onSubmit={handleSubmit}
+      isLoading={loading}
+    />
   )
 }
 

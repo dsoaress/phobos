@@ -18,7 +18,7 @@ export async function getBlogPost(db, { _id }) {
 
 export async function insertBlogPost(
   db,
-  { body, date, image, status, title, userId }
+  { body, date, image, published, title, userId }
 ) {
   return db
     .collection('blog')
@@ -28,7 +28,7 @@ export async function insertBlogPost(
       date,
       image,
       slug: slugify(title, { lower: true }),
-      status,
+      published,
       title,
       userId
     })
@@ -37,13 +37,13 @@ export async function insertBlogPost(
 
 export async function updateBlogPost(
   db,
-  { _id, body, date, image, status, title, userId }
+  { _id, body, date, image, published, title, userId }
 ) {
   const update = {
     body,
     date,
     image,
-    status,
+    published,
     title,
     userId
   }

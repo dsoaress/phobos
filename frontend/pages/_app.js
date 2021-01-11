@@ -1,7 +1,10 @@
-import '../styles/globals.css'
-import 'typeface-anton'
-import 'typeface-roboto'
+import GlobalStyles from '@/components/GlobalStyles'
 
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <GlobalStyles />
+      <Component {...pageProps} />
+    </>
+  )
 }

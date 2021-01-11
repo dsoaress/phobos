@@ -52,12 +52,12 @@ handler.get(async (req, res) => {
 })
 
 handler.post(upload.single('image'), async (req, res) => {
-  const { body, date, status, title } = req.body
+  const { body, date, published, title } = req.body
   if (!req.user) {
     return res.status(401).send('You need to be authenticated')
   }
 
-  if (!body || !date || !req.file || !title) {
+  if (!body || !date || !req.file || !published || !title) {
     res.status(400).json({ error: 'Missing body parameter' })
     return
   }
@@ -68,7 +68,7 @@ handler.post(upload.single('image'), async (req, res) => {
     body,
     date,
     image: secure_url,
-    status,
+    published: Boolean(published),
     title,
     userId: req.user._id
   })
@@ -76,23 +76,25 @@ handler.post(upload.single('image'), async (req, res) => {
   return res.json({ post })
 })
 
-handler.patch(async (req, res) => {
-  const { _id, body, date, image, status, title } = req.body
+handler.patch(upload.single('image'), async (req, res) => {
+  const { _id, body, date, published, title } = req.body
   if (!req.user) {
     return res.status(401).send('You need to be authenticated')
   }
 
-  if (!body || !date || !image || !title) {
+  if (!body || !date || !req.file || !published || !title) {
     res.status(400).json({ error: 'Missing body parameter' })
     return
   }
+
+  const { secure_url } = await cloudinary.uploader.upload(req.file.path)
 
   const post = await updateBlogPost(req.db, {
     _id,
     body,
     date,
-    image,
-    status,
+    image: secure_url,
+    published: Boolean(published),
     title,
     userId: req.user._id
   })

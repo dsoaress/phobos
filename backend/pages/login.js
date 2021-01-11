@@ -1,17 +1,13 @@
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import LoginForm from '@/components/LoginForm'
 import { useCurrentUser } from '@/hooks'
-import LoginWrapper from '@/components/login-wrapper'
-import { Email, Password } from '@/components/login-inputs'
-import SpinnerButton from '@/components/spinner-button'
-import Alert from '@/components/alert'
 
 const LoginPage = () => {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
-  const [errorMsg, setErrorMsg] = useState('')
+  const [message, setMessage] = useState({})
   const [user, { mutate }] = useCurrentUser()
   useEffect(() => {
     if (user) router.push('/blog')
@@ -20,7 +16,7 @@ const LoginPage = () => {
   async function handleSubmit(e) {
     e.preventDefault()
     setLoading(true)
-    setErrorMsg('')
+    setMessage({})
 
     const body = {
       email: e.currentTarget.email.value,
@@ -35,29 +31,25 @@ const LoginPage = () => {
       const userObj = await res.json()
       mutate(userObj)
     } else {
-      setErrorMsg('Email ou senha incorretos')
+      setMessage({
+        label: 'Email ou senha incorretos',
+        type: 'danger',
+        show: true
+      })
       setLoading(false)
     }
   }
-
   return (
-    <LoginWrapper title="Digite seu email">
-      <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-        <Email />
-        <Password />
-        <SpinnerButton label="Entrar" loading={loading} />
-        <div>
-          <Link href="/forget-password">
-            <a>
-              <button className="secondary w-full">Esqueceu a senha?</button>
-            </a>
-          </Link>
-        </div>
-        <div className="h-14">
-          {errorMsg && <Alert label={errorMsg} className="danger" />}
-        </div>
-      </form>
-    </LoginWrapper>
+    <LoginForm
+      title="Digite seu email"
+      email
+      password
+      buttonLabel="Entrar"
+      hasForgatPassword={true}
+      message={message}
+      onSubmit={handleSubmit}
+      isLoading={loading}
+    />
   )
 }
 

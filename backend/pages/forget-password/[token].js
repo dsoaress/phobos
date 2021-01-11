@@ -1,19 +1,18 @@
 import { useState } from 'react'
 import nc from 'next-connect'
-import Router from 'next/router'
 import { database } from '@/middlewares'
 import { findTokenByIdAndType } from '@/db'
 
-import LoginWrapper from '@/components/login-wrapper'
-import { Password } from '@/components/login-inputs'
-import SpinnerButton from '@/components/spinner-button'
-import Alert from '@/components/alert'
+import LoginForm from '@/components/LoginForm'
 
 const ResetPasswordTokenPage = ({ valid, token }) => {
+  const [message, setMessage] = useState({})
   const [loading, setLoading] = useState(false)
   async function handleSubmit(event) {
     event.preventDefault()
     setLoading(true)
+    setMessage({})
+
     const body = {
       password: event.currentTarget.password.value,
       token
@@ -25,20 +24,31 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
       body: JSON.stringify(body)
     })
 
-    if (res.status === 200) Router.replace('/')
+    if (res.status === 200) {
+      setMessage({
+        label: 'Senha alterada com sucesso. Você pode fechar essa janela',
+        type: 'success',
+        show: true
+      })
+    } else {
+      setMessage({
+        label: 'Ocorreu um erro interno. Tente novamente',
+        type: 'danger',
+        show: true
+      })
+    }
   }
 
   return (
-    <LoginWrapper title={valid && 'Defina uma nova senha'}>
-      {valid ? (
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <Password />
-          <SpinnerButton label="Definir senha" loading={loading} />
-        </form>
-      ) : (
-        <Alert label="O link está expirado" className="danger" />
-      )}
-    </LoginWrapper>
+    <LoginForm
+      title={valid ? 'Defina uma nova senha' : 'O link está expirado'}
+      password
+      buttonLabel="Definir senha"
+      hasForgatPassword={false}
+      message={message}
+      onSubmit={handleSubmit}
+      isLoading={loading}
+    />
   )
 }
 

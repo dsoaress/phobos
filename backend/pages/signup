@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
+import LoginForm from '@/components/LoginForm'
 import { useCurrentUser } from '@/hooks'
-import LoginWrapper from '@/components/login-wrapper'
-import { Email, Name, Password } from '@/components/login-inputs'
-import SpinnerButton from '@/components/spinner-button'
-import Alert from '@/components/alert'
 
 const SignupPage = () => {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [user, { mutate }] = useCurrentUser()
-  const [errorMsg, setErrorMsg] = useState('')
+  const [message, setMessage] = useState({})
   useEffect(() => {
     if (user) router.push('/')
   }, [user])
@@ -19,7 +16,7 @@ const SignupPage = () => {
   const handleSubmit = async e => {
     e.preventDefault()
     setLoading(true)
-    setErrorMsg('')
+    setMessage({})
 
     const body = {
       email: e.currentTarget.email.value,
@@ -34,24 +31,33 @@ const SignupPage = () => {
     if (res.status === 201) {
       const userObj = await res.json()
       mutate(userObj)
+      setMessage({
+        label: 'Conta criada com sucesso',
+        type: 'success',
+        show: true
+      })
     } else {
-      setErrorMsg(await res.text())
+      setMessage({
+        label: await res.text(),
+        type: 'danger',
+        show: true
+      })
     }
     setLoading(false)
   }
 
   return (
-    <LoginWrapper title="Crie sua conta">
-      <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-        <Name />
-        <Email />
-        <Password />
-        <SpinnerButton label="Criar conta" loading={loading} />
-        <div className="h-14">
-          {errorMsg && <Alert label={errorMsg} className="warning" />}
-        </div>
-      </form>
-    </LoginWrapper>
+    <LoginForm
+      title="Crie sua conta"
+      name
+      email
+      password
+      buttonLabel="Criar conta"
+      hasForgatPassword={true}
+      message={message}
+      onSubmit={handleSubmit}
+      isLoading={loading}
+    />
   )
 }
 
