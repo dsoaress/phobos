@@ -42,7 +42,7 @@
     "mongodb": "^3.6.3"
   },
   "resolutions": {
-    "typeorm": "0.2.29"
+    "typeorm": "0.2.30"
   },
   "babelMacros": {
     "twin": {
