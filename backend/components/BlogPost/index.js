@@ -31,7 +31,14 @@ export default function BlogPost({
   return (
     <Layout>
       <Subheader title={title || t.blogPostPage.newPost}>
-        {post && <Button label="Excluir" onClick={handleDelete} danger small />}
+        {post && (
+          <Button
+            label={t.blogPostPage.deleteButton}
+            onClick={handleDelete}
+            danger
+            small
+          />
+        )}
         <Button label={t.blogPostPage.previewButton} small secondary />
         <Button
           type="submit"

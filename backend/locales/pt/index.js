@@ -53,6 +53,7 @@ export default {
     draft: 'Draft',
     public: 'Public',
     newPost: 'Nova publicação',
+    deleteButton: 'Excluir',
     previewButton: 'Preview',
     saveButton: 'Salvar',
     title: 'Título da publicação',
