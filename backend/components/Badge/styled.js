@@ -1,6 +1,6 @@
 import tw, { styled } from 'twin.macro'
 
-export const Badge = styled.span(({ published }) => [
+export const Badge = styled.span(({ status }) => [
   tw`
     px-1.5
     inline-flex
@@ -8,7 +8,7 @@ export const Badge = styled.span(({ published }) => [
     leading-5
     rounded-full
   `,
-  published
+  status === 'public'
     ? tw`bg-green-100 text-green-800`
     : tw`bg-yellow-100 text-yellow-800`
 ])

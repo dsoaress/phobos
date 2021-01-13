@@ -4,12 +4,13 @@ import tw from 'twin.macro'
 
 import * as S from './styled'
 
-export default function WidgetImageUpload(props) {
+export default function WidgetImageUpload({ defaultValue, ...props }) {
   const [files, setFiles] = useState([])
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     multiple: false,
     onDrop: acceptedFiles => {
+      setFiles([])
       setFiles(
         acceptedFiles.map(file =>
           Object.assign(file, {
@@ -28,26 +29,51 @@ export default function WidgetImageUpload(props) {
   )
 
   return (
-    <div css={[tw`flex`, files.length !== 0 && tw`space-x-4`]}>
+    <div
+      css={[
+        tw`grid py-4`,
+        (files.length !== 0 || defaultValue) && tw`gap-4 lg:grid-cols-2`
+      ]}
+    >
       <S.Wrapper {...getRootProps()}>
         <S.Main>
           <S.TextGroup>
-            <input {...getInputProps()} {...props} required />
+            <input {...getInputProps()} {...props} />
             <S.Title>Imagem em destaque</S.Title>
-            <p>Arraste uma imagem aqui ou clique para selecionar um arquivo</p>
-            <p>
-              Para alterar a imagem selecionada basta substituir por uma nova
-            </p>
+            <S.Desc>
+              Arraste uma imagem aqui ou clique para selecionar um arquivo
+            </S.Desc>
           </S.TextGroup>
         </S.Main>
       </S.Wrapper>
-      <aside>
-        {files.map(file => (
-          <S.Thumb key={file.name}>
-            <img src={file.preview} />
-          </S.Thumb>
-        ))}
-      </aside>
+      {(files.length !== 0 || defaultValue) && (
+        <aside>
+          <S.ThumbWrapper>
+            {files.length === 0 ? (
+              <S.Thumb
+                style={{
+                  background: `url(${defaultValue})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
+              />
+            ) : (
+              files.map(file => {
+                return (
+                  <S.Thumb
+                    style={{
+                      background: `url(${file.preview})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                    key={file.name}
+                  />
+                )
+              })
+            )}
+          </S.ThumbWrapper>
+        </aside>
+      )}
     </div>
   )
 }

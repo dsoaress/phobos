@@ -4,20 +4,19 @@ import Spinner from '@/components/Spinner'
 
 export const Button = styled.button(({ ...props }) => [
   tw`
+    relative
     py-4
     px-8
     text-sm
     rounded-md
     font-medium
     text-white
+    flex-shrink-0
     border
     border-indigo-600
     bg-indigo-600
     hover:bg-indigo-700
     focus:outline-none
-    focus:ring-2
-    focus:ring-offset-2
-    focus:ring-indigo-500
     transition-colors
     duration-500
   `,

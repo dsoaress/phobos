@@ -33,15 +33,12 @@ cloudinary.config({
 })
 
 handler.delete(async (req, res) => {
-  const { _id } = req.body
+  const { _id } = req.query
   if (!req.user) {
     return res.status(401).send('You need to be authenticated')
   }
 
-  const post = await deleteBlogPost(req.db, {
-    _id,
-    userId: req.user._id
-  })
+  const post = await deleteBlogPost(req.db, { _id })
 
   return res.json({ post })
 })
@@ -51,14 +48,19 @@ handler.get(async (req, res) => {
   res.send({ posts })
 })
 
-handler.post(upload.single('image'), async (req, res) => {
-  const { body, date, published, title } = req.body
+handler.put(upload.single('image'), async (req, res) => {
+  const { body, date, status, title } = req.body
   if (!req.user) {
     return res.status(401).send('You need to be authenticated')
   }
 
-  if (!body || !date || !req.file || !published || !title) {
+  if (!body || !date || !req.file || !title) {
     res.status(400).json({ error: 'Missing body parameter' })
+    return
+  }
+
+  if (!req.file) {
+    res.status(400).json({ error: 'Missing image' })
     return
   }
 
@@ -68,7 +70,7 @@ handler.post(upload.single('image'), async (req, res) => {
     body,
     date,
     image: secure_url,
-    published: Boolean(published),
+    status,
     title,
     userId: req.user._id
   })
@@ -77,24 +79,33 @@ handler.post(upload.single('image'), async (req, res) => {
 })
 
 handler.patch(upload.single('image'), async (req, res) => {
-  const { _id, body, date, published, title } = req.body
+  const { _id, body, date, image, status, title } = req.body
   if (!req.user) {
     return res.status(401).send('You need to be authenticated')
   }
 
-  if (!body || !date || !req.file || !published || !title) {
+  if (!body || !date || !title) {
     res.status(400).json({ error: 'Missing body parameter' })
     return
   }
 
-  const { secure_url } = await cloudinary.uploader.upload(req.file.path)
+  let imagePatch = image
+  if (req.file) {
+    const { secure_url } = await cloudinary.uploader.upload(req.file.path)
+    imagePatch = secure_url
+  }
+
+  if (imagePatch === null) {
+    res.status(400).json({ error: 'Missing image' })
+    return
+  }
 
   const post = await updateBlogPost(req.db, {
     _id,
     body,
     date,
-    image: secure_url,
-    published: Boolean(published),
+    image: imagePatch,
+    status,
     title,
     userId: req.user._id
   })

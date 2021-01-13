@@ -12,15 +12,8 @@ export const StyledComponentsGlobal = createGlobalStyle`
       duration-500
     `}
   }
-  h1,
-  h2 {
-    ${tw`font-bold leading-tight`}
-  }
-  h1 {
-    ${tw`text-3xl`}
-  }
-  h2 {
-    ${tw`text-xl`}
+  body {
+    ${tw`relative min-h-screen`}
   }
   a {
     ${tw`transition duration-500`}
@@ -37,7 +30,7 @@ export const StyledComponentsGlobal = createGlobalStyle`
       bg-white
       border-gray-300
       font-sans
-      py-4
+      py-3
     `}
   }
   .quill .ql-container.ql-snow {
@@ -49,13 +42,10 @@ export const StyledComponentsGlobal = createGlobalStyle`
     `}
   }
   .quill .ql-editor {
-    ${tw`h-96 text-base`}
+    ${tw`text-base`};
+    min-height: 27.95rem;
   }
   .quill .ql-editor p {
     ${tw`mb-4 leading-6`}
-  }
-
-  .post .image {
-    ${tw`relative h-40 w-40`}
   }
 `

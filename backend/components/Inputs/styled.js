@@ -10,17 +10,16 @@ export const Label = styled.label(({ srOnly }) => [
   srOnly && tw`sr-only`
 ])
 
-export const Input = styled.input(() => [InputBase], tw`block w-full`)
+export const Input = styled.input(() => [InputBase])
 
-export const Checkbox = styled.input(() => [InputBase], tw`mr-2`)
+export const Select = styled.select(() => [InputBase])
 
-export const Textarea = styled.textarea(() => [
-  InputBase,
-  tw`block w-full resize-none h-96`
-])
+export const Textarea = styled.textarea(() => [InputBase, tw`resize-none h-96`])
 
 const InputBase = css`
   ${tw`
+    block
+    w-full
     p-4
     rounded-md
     border

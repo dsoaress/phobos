@@ -24,14 +24,12 @@ const ForgetPasswordPage = () => {
     if (res.status === 200) {
       setMessage({
         label: 'Verifique sua caixa de entrada',
-        type: 'success',
-        show: true
+        type: 'success'
       })
     } else {
       setMessage({
         label: 'Erro. Por favor, tente novamente',
-        type: 'danger',
-        show: true
+        type: 'danger'
       })
     }
     setLoading(false)

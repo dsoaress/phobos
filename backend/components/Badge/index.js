@@ -1,9 +1,9 @@
 import * as S from './styled'
 
-export default function Badge({ published }) {
+export default function Badge({ status }) {
   return (
-    <S.Badge published={published}>
-      {published ? 'Publicado' : 'Rascunho'}
+    <S.Badge status={status}>
+      {status === 'public' ? 'Público' : 'Rascunho'}
     </S.Badge>
   )
 }

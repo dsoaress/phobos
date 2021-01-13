@@ -53,13 +53,3 @@ export const Logout = tw.div`
   md:pt-0
   md:border-none
 `
-
-export const Header = tw.header`
-  bg-white
-  shadow mb-8
-`
-
-export const HeaderWrapper = tw.div`
-  container
-  py-6
-`

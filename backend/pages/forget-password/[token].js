@@ -27,14 +27,12 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
     if (res.status === 200) {
       setMessage({
         label: 'Senha alterada com sucesso. Você pode fechar essa janela',
-        type: 'success',
-        show: true
+        type: 'success'
       })
     } else {
       setMessage({
         label: 'Ocorreu um erro interno. Tente novamente',
-        type: 'danger',
-        show: true
+        type: 'danger'
       })
     }
   }

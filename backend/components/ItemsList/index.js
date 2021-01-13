@@ -13,8 +13,7 @@ export default function ItemsList({ data, title }) {
   const router = useRouter()
   const message = {
     label: 'Não existe conteúdo para ser exibido aqui',
-    type: 'warning',
-    show: true
+    type: 'warning'
   }
   return (
     <S.ItemsList>
@@ -33,7 +32,7 @@ export default function ItemsList({ data, title }) {
                     {format(parseISO(item.date), "d 'de' MMM 'de' yyyy", {
                       locale: pt
                     }) || item.role}{' '}
-                    <Badge published={item.published} />
+                    <Badge status={item.status} />
                   </S.Meta>
                 )}
               </S.Title>

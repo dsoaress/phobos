@@ -3,11 +3,14 @@ import { useRouter } from 'next/router'
 
 import Meta from '@/components/Meta'
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 import LoginForm from '@/components/LoginForm'
 import SpinnerScreen from '@/components/SpinnerScreen'
 import { useCurrentUser } from '@/hooks'
 
-export default function Layout({ children, postId, title }) {
+import * as S from './styled'
+
+export default function Layout({ children }) {
   const [user] = useCurrentUser()
   const [routeLoading, setRouteLoading] = useState(false)
   const router = useRouter()
@@ -41,8 +44,9 @@ export default function Layout({ children, postId, title }) {
   return (
     <>
       <Meta />
-      <Header title={title} postId={postId} />
-      <main>{routeLoading ? <SpinnerScreen /> : children}</main>
+      <Header />
+      <S.Main>{routeLoading ? <SpinnerScreen /> : children}</S.Main>
+      <Footer />
     </>
   )
 }

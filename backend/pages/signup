@@ -33,14 +33,12 @@ const SignupPage = () => {
       mutate(userObj)
       setMessage({
         label: 'Conta criada com sucesso',
-        type: 'success',
-        show: true
+        type: 'success'
       })
     } else {
       setMessage({
         label: await res.text(),
-        type: 'danger',
-        show: true
+        type: 'danger'
       })
     }
     setLoading(false)

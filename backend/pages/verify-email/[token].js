@@ -10,13 +10,11 @@ export default function EmailVerifyPage({ success }) {
   success
     ? setMessage({
         label: 'Obrigado por verificar seu email, você pode fechar essa janela',
-        type: 'success',
-        show: true
+        type: 'success'
       })
     : setMessage({
         label: 'O link está expirado',
-        type: 'danger',
-        show: true
+        type: 'danger'
       })
 
   return <LoginForm message={message} />

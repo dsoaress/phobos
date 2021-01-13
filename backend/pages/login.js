@@ -33,8 +33,7 @@ const LoginPage = () => {
     } else {
       setMessage({
         label: 'Email ou senha incorretos',
-        type: 'danger',
-        show: true
+        type: 'danger'
       })
       setLoading(false)
     }
