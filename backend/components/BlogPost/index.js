@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 import Layout from '@/components/Layout'
 import Subheader from '@/components/Subheader'
@@ -7,6 +8,7 @@ import { Input, Select } from '@/components/Inputs'
 import WidgetImageUpload from '@/components/WidgetImageUpload'
 import WidgetRichText from '@/components/WidgetRichText'
 import Alert from '@/components/Alert'
+import locales from '@/locales'
 
 import * as S from './styled'
 
@@ -20,16 +22,20 @@ export default function BlogPost({
   setBody,
   statusItems
 }) {
+  const router = useRouter()
+  const { locale } = router
+  const t = locales[locale]
+
   const [title, setTitle] = useState(post?.title)
 
   return (
     <Layout>
-      <Subheader title={title || 'Nova publicação'}>
+      <Subheader title={title || t.blogPostPage.newPost}>
         {post && <Button label="Excluir" onClick={handleDelete} danger small />}
-        <Button type="submit" label="Preview" small secondary />
+        <Button label={t.blogPostPage.previewButton} small secondary />
         <Button
           type="submit"
-          label="Salvar"
+          label={t.blogPostPage.saveButton}
           small
           isLoading={loading}
           form="post"
@@ -40,19 +46,19 @@ export default function BlogPost({
           <Input
             type="text"
             id="title"
-            label="Título da publicação"
+            label={t.blogPostPage.title}
             defaultValue={post?.title}
             onChange={e => setTitle(e.currentTarget.value)}
           />
           <Input
             type="date"
             id="date"
-            label="Data da publicação"
+            label={t.blogPostPage.date}
             defaultValue={post?.date}
           />
           <Select
             id="status"
-            label="Status da publicação"
+            label={t.blogPostPage.status}
             defaultValue={post?.status}
             items={statusItems}
           />

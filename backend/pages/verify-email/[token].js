@@ -1,19 +1,26 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import nc from 'next-connect'
+
 import { all } from '@/middlewares'
 import { updateUserById, findAndDeleteTokenByIdAndType } from '@/db'
-
 import LoginForm from '@/components/LoginForm'
 
+import locales from '@/locales'
+
 export default function EmailVerifyPage({ success }) {
+  const router = useRouter()
+  const { locale } = router
+  const t = locales[locale]
+
   const [message, setMessage] = useState({})
   success
     ? setMessage({
-        label: 'Obrigado por verificar seu email, você pode fechar essa janela',
+        label: t.emailVerifyPage.message,
         type: 'success'
       })
     : setMessage({
-        label: 'O link está expirado',
+        label: t.emailVerifyPage.errorMessage,
         type: 'danger'
       })
 

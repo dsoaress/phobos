@@ -1,12 +1,20 @@
+import { useRouter } from 'next/router'
+
+import locales from '@/locales'
+
 import * as S from './styled'
 
 export default function Footer() {
+  const router = useRouter()
+  const { locale } = router
+  const t = locales[locale]
+
   return (
     <S.Footer>
       <S.Wrapper>
         <p>{new Date().getFullYear()} &copy; Phobos CMS</p>
         <p>
-          Desenvolvido por{' '}
+          {t.footer}{' '}
           <S.Link href="https://marscollective.co">Mars Collective</S.Link>
         </p>
       </S.Wrapper>

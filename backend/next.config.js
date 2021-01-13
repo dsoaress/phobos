@@ -16,5 +16,9 @@ module.exports = {
   },
   images: {
     domains: ['images.unsplash.com', 'res.cloudinary.com']
+  },
+  i18n: {
+    locales: ['en', 'pt'],
+    defaultLocale: 'en'
   }
 }

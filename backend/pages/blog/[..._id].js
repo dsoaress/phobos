@@ -1,23 +1,27 @@
 import { useState } from 'react'
-import axios from 'axios'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 import BlogPost from '@/components/BlogPost'
+import locales from '@/locales'
 
 export default function BlogPostPage({ post }) {
+  const router = useRouter()
+  const { locale } = router
+  const t = locales[locale]
+
   const [body, setBody] = useState(post?.body)
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
-  const router = useRouter()
 
   const statusItems = [
     {
       value: 'draft',
-      name: 'Rascunho'
+      name: t.blogPostPage.draft
     },
     {
       value: 'public',
-      name: 'Público'
+      name: t.blogPostPage.public
     }
   ]
 
@@ -30,7 +34,7 @@ export default function BlogPostPage({ post }) {
 
     if (!body || !date || !image || !title) {
       setMessage({
-        label: 'Todos os campos são obrigatórios',
+        label: t.blogPostPage.warningMessage,
         type: 'warning'
       })
       setTimeout(() => {
@@ -55,7 +59,7 @@ export default function BlogPostPage({ post }) {
 
     if (res.status === 200) {
       setMessage({
-        label: 'Post salvo com sucesso...',
+        label: t.blogPostPage.message,
         type: 'success'
       })
       setTimeout(() => {
@@ -63,7 +67,7 @@ export default function BlogPostPage({ post }) {
       }, 3000)
     } else {
       setMessage({
-        label: 'Ocorreu um erro, tente novamente',
+        label: t.blogPostPage.errorMessage,
         type: 'danger'
       })
       setTimeout(() => {
@@ -78,7 +82,7 @@ export default function BlogPostPage({ post }) {
       params: { _id: post._id }
     })
     setMessage({
-      label: 'Post excluído...',
+      label: t.blogPostPage.deleteMessage,
       type: 'success'
     })
     setTimeout(() => {

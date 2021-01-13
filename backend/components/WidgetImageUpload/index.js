@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { useDropzone } from 'react-dropzone'
 import tw from 'twin.macro'
+
+import locales from '@/locales'
 
 import * as S from './styled'
 
 export default function WidgetImageUpload({ defaultValue, ...props }) {
+  const router = useRouter()
+  const { locale } = router
+  const t = locales[locale]
+
   const [files, setFiles] = useState([])
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
@@ -39,10 +46,8 @@ export default function WidgetImageUpload({ defaultValue, ...props }) {
         <S.Main>
           <S.TextGroup>
             <input {...getInputProps()} {...props} />
-            <S.Title>Imagem em destaque</S.Title>
-            <S.Desc>
-              Arraste uma imagem aqui ou clique para selecionar um arquivo
-            </S.Desc>
+            <S.Title>{t.blogPostPage.imageTitle}</S.Title>
+            <S.Desc>{t.blogPostPage.imageDesc}</S.Desc>
           </S.TextGroup>
         </S.Main>
       </S.Wrapper>

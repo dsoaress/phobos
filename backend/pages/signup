@@ -4,8 +4,13 @@ import { useRouter } from 'next/router'
 import LoginForm from '@/components/LoginForm'
 import { useCurrentUser } from '@/hooks'
 
+import locales from '@/locales'
+
 const SignupPage = () => {
   const router = useRouter()
+  const { locale } = router
+  const t = locales[locale]
+
   const [loading, setLoading] = useState(false)
   const [user, { mutate }] = useCurrentUser()
   const [message, setMessage] = useState({})
@@ -32,12 +37,12 @@ const SignupPage = () => {
       const userObj = await res.json()
       mutate(userObj)
       setMessage({
-        label: 'Conta criada com sucesso',
+        label: t.signupPage.message,
         type: 'success'
       })
     } else {
       setMessage({
-        label: await res.text(),
+        label: t.signupPage.errorMessage,
         type: 'danger'
       })
     }
@@ -46,11 +51,11 @@ const SignupPage = () => {
 
   return (
     <LoginForm
-      title="Crie sua conta"
+      title={t.signupPage.title}
       name
       email
       password
-      buttonLabel="Criar conta"
+      buttonLabel={t.signupPage.buttonLabel}
       hasForgatPassword={true}
       message={message}
       onSubmit={handleSubmit}

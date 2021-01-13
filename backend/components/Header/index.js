@@ -5,11 +5,15 @@ import tw from 'twin.macro'
 import ActiveLink from '@/components/ActiveLink'
 import Button from '@/components/Button'
 import { useCurrentUser } from '@/hooks'
+import locales from '@/locales'
 
 import * as S from './styled'
 
 export default function Header() {
   const router = useRouter()
+  const { locale } = router
+  const t = locales[locale]
+
   const [menuOpen, setMenuOpen] = useState(false)
   const [, { mutate }] = useCurrentUser()
 
@@ -26,7 +30,7 @@ export default function Header() {
       <S.Wrapper>
         <S.Logo>
           <S.MenuToggle onClick={() => setMenuOpen(!menuOpen)}>
-            <span css={[tw`sr-only`]}>Abrir menu principal</span>
+            <span css={[tw`sr-only`]}>{t.header.menuToggle}</span>
             <svg
               css={[tw`block h-6 w-6`]}
               xmlns="http://www.w3.org/2000/svg"
@@ -51,13 +55,17 @@ export default function Header() {
         </S.Logo>
         <div css={Menu(menuOpen)}>
           <ActiveLink activeClassName="active" href="/blog">
-            <S.NavLink onClick={() => setMenuOpen(!menuOpen)}>Blog</S.NavLink>
+            <S.NavLink onClick={() => setMenuOpen(!menuOpen)}>
+              {t.blogPage.title}
+            </S.NavLink>
           </ActiveLink>
           <ActiveLink activeClassName="active" href="/sections">
-            <S.NavLink onClick={() => setMenuOpen(!menuOpen)}>Seções</S.NavLink>
+            <S.NavLink onClick={() => setMenuOpen(!menuOpen)}>
+              {t.sectionsPage}
+            </S.NavLink>
           </ActiveLink>
           <S.Logout>
-            <Button label="Fazer logout" onClick={handleLogout} small />
+            <Button label={t.header.logout} onClick={handleLogout} small />
           </S.Logout>
         </div>
       </S.Wrapper>

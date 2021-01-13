@@ -1,8 +1,15 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 import LoginForm from '@/components/LoginForm'
 
+import locales from '@/locales'
+
 const ForgetPasswordPage = () => {
+  const router = useRouter()
+  const { locale } = router
+  const t = locales[locale]
+
   const [message, setMessage] = useState({})
   const [loading, setLoading] = useState(false)
 
@@ -23,12 +30,12 @@ const ForgetPasswordPage = () => {
 
     if (res.status === 200) {
       setMessage({
-        label: 'Verifique sua caixa de entrada',
+        label: t.forgatPasswordPage.message,
         type: 'success'
       })
     } else {
       setMessage({
-        label: 'Erro. Por favor, tente novamente',
+        label: t.forgatPasswordPage.errorMessage,
         type: 'danger'
       })
     }
@@ -37,9 +44,9 @@ const ForgetPasswordPage = () => {
 
   return (
     <LoginForm
-      title="Digite seu email para recuperar o acesso"
+      title={t.forgatPasswordPage.title}
       email
-      buttonLabel="Enviar"
+      buttonLabel={t.forgatPasswordPage.buttonLabel}
       hasForgatPassword={false}
       message={message}
       onSubmit={handleSubmit}

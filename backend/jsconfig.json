@@ -4,6 +4,7 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/lib/*": ["lib/*"],
+      "@/locales": ["locales"],
       "@/middlewares": ["middlewares"],
       "@/hooks": ["hooks"],
       "@/db": ["db"]

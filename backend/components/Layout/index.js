@@ -8,12 +8,17 @@ import LoginForm from '@/components/LoginForm'
 import SpinnerScreen from '@/components/SpinnerScreen'
 import { useCurrentUser } from '@/hooks'
 
+import locales from '@/locales'
+
 import * as S from './styled'
 
 export default function Layout({ children }) {
+  const router = useRouter()
+  const { locale } = router
+  const t = locales[locale]
+
   const [user] = useCurrentUser()
   const [routeLoading, setRouteLoading] = useState(false)
-  const router = useRouter()
 
   useEffect(() => {
     const start = () => {
@@ -35,8 +40,8 @@ export default function Layout({ children }) {
   if (!user) {
     return (
       <LoginForm
-        title="Você não está logado(a)"
-        buttonLabel="Fazer login"
+        title={t.login.title}
+        buttonLabel={t.login.buttonLabel}
         hasLogin
       />
     )

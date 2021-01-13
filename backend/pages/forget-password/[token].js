@@ -1,11 +1,18 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import nc from 'next-connect'
+
 import { database } from '@/middlewares'
 import { findTokenByIdAndType } from '@/db'
-
 import LoginForm from '@/components/LoginForm'
 
+import locales from '@/locales'
+
 const ResetPasswordTokenPage = ({ valid, token }) => {
+  const router = useRouter()
+  const { locale } = router
+  const t = locales[locale]
+
   const [message, setMessage] = useState({})
   const [loading, setLoading] = useState(false)
   async function handleSubmit(event) {
@@ -26,12 +33,12 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
 
     if (res.status === 200) {
       setMessage({
-        label: 'Senha alterada com sucesso. Você pode fechar essa janela',
+        label: t.forgatPasswordToken.message,
         type: 'success'
       })
     } else {
       setMessage({
-        label: 'Ocorreu um erro interno. Tente novamente',
+        label: t.forgatPasswordToken.errorMessage,
         type: 'danger'
       })
     }
@@ -39,10 +46,11 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
 
   return (
     <LoginForm
-      title={valid ? 'Defina uma nova senha' : 'O link está expirado'}
+      title={
+        valid ? t.forgatPasswordToken.title : t.forgatPasswordToken.altTitle
+      }
       password
-      buttonLabel="Definir senha"
-      hasForgatPassword={false}
+      buttonLabel={t.forgatPasswordToken.buttonLabel}
       message={message}
       onSubmit={handleSubmit}
       isLoading={loading}

@@ -4,8 +4,13 @@ import { useRouter } from 'next/router'
 import LoginForm from '@/components/LoginForm'
 import { useCurrentUser } from '@/hooks'
 
+import locales from '@/locales'
+
 const LoginPage = () => {
   const router = useRouter()
+  const { locale } = router
+  const t = locales[locale]
+
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState({})
   const [user, { mutate }] = useCurrentUser()
@@ -32,7 +37,7 @@ const LoginPage = () => {
       mutate(userObj)
     } else {
       setMessage({
-        label: 'Email ou senha incorretos',
+        label: t.loginPage.errorMessage,
         type: 'danger'
       })
       setLoading(false)
@@ -40,10 +45,10 @@ const LoginPage = () => {
   }
   return (
     <LoginForm
-      title="Digite seu email"
+      title={t.loginPage.title}
       email
       password
-      buttonLabel="Entrar"
+      buttonLabel={t.loginPage.buttonLabel}
       hasForgatPassword={true}
       message={message}
       onSubmit={handleSubmit}

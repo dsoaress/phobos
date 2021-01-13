@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import axios from 'axios'
 import tw from 'twin.macro'
@@ -8,8 +9,13 @@ import Button from '@/components/Button'
 import Link from '@/components/Link'
 import ItemsList from '@/components/ItemsList'
 import fetcher from '@/lib/fetch'
+import locales from '@/locales'
 
 export default function Blog(props) {
+  const router = useRouter()
+  const { locale } = router
+  const t = locales[locale]
+
   const { data } = useSWR(
     '/api/blog',
     fetcher,
@@ -18,9 +24,9 @@ export default function Blog(props) {
   )
   return (
     <Layout>
-      <Subheader title="Blog">
+      <Subheader title={t.blogPage.title}>
         <Link href="/blog/new">
-          <Button label="Novo post" small />
+          <Button label={t.blogPage.buttonLabel} small />
         </Link>
       </Subheader>
       <div css={[tw`container`]}>{data && <ItemsList data={data.posts} />}</div>

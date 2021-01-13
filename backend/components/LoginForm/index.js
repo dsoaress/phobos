@@ -1,8 +1,12 @@
+import { useRouter } from 'next/router'
+
 import Meta from '@/components/Meta'
 import { Input } from '@/components/Inputs'
 import Button from '@/components/Button'
 import Link from '@/components/Link'
 import Alert from '@/components/Alert'
+
+import locales from '@/locales'
 
 import * as S from './styled'
 
@@ -18,6 +22,10 @@ export default function LoginForm({
   password,
   title
 }) {
+  const router = useRouter()
+  const { locale } = router
+  const t = locales[locale]
+
   return (
     <>
       <Meta />
@@ -32,16 +40,28 @@ export default function LoginForm({
           </div>
           <S.Form onSubmit={onSubmit}>
             {name && (
-              <Input id="name" type="name" label="Nome" srOnly required />
+              <Input
+                id="name"
+                type="name"
+                label={t.loginForm.name}
+                srOnly
+                required
+              />
             )}
             {email && (
-              <Input id="email" type="email" label="Email" srOnly required />
+              <Input
+                id="email"
+                type="email"
+                label={t.loginForm.email}
+                srOnly
+                required
+              />
             )}
             {password && (
               <Input
                 id="password"
                 type="password"
-                label="Password"
+                label={t.loginForm.password}
                 srOnly
                 required
               />
@@ -56,7 +76,7 @@ export default function LoginForm({
             )}
             {hasForgatPassword && (
               <Link href="/forget-password">
-                <Button label="Esqueceu a senha?" secondary full />
+                <Button label={t.loginForm.forgatPassword} secondary full />
               </Link>
             )}
             {hasLogin && (
