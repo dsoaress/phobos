@@ -1,5 +1,5 @@
 import nc from 'next-connect'
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcrypt'
 import { all } from '@/middlewares'
 import { updateUserById } from '@/db'
 

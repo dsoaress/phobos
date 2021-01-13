@@ -1,5 +1,5 @@
 import passport from 'passport'
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcrypt'
 import { Strategy as LocalStrategy } from 'passport-local'
 import { findUserById, findUserByEmail } from '@/db'
 
