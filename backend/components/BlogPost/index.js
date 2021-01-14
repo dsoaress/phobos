@@ -42,9 +42,13 @@ export default function BlogPost({
         <Button label={t.blogPostPage.previewButton} small secondary />
         <Button
           type="submit"
-          label={t.blogPostPage.saveButton}
+          label={
+            loading
+              ? t.blogPostPage.saveButtonLoading
+              : t.blogPostPage.saveButton
+          }
+          disabled={loading ? true : false}
           small
-          isLoading={loading}
           form="post"
         />
       </Subheader>

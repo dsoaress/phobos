@@ -56,6 +56,7 @@ export default {
     deleteButton: 'Delete',
     previewButton: 'Preview',
     saveButton: 'Save',
+    saveButtonLoading: 'Saving',
     title: 'Title',
     date: 'Date',
     status: 'Status',

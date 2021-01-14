@@ -53,7 +53,7 @@ export default function Header() {
             alt="Workflow"
           />
         </S.Logo>
-        <div css={Menu(menuOpen)}>
+        <S.Menu menuOpen={menuOpen}>
           <ActiveLink activeClassName="active" href="/blog">
             <S.NavLink onClick={() => setMenuOpen(!menuOpen)}>
               {t.blogPage.title}
@@ -65,22 +65,10 @@ export default function Header() {
             </S.NavLink>
           </ActiveLink>
           <S.Logout>
-            <Button label={t.header.logout} onClick={handleLogout} small />
+            <Button label={t.header.logout} onClick={handleLogout} full small />
           </S.Logout>
-        </div>
+        </S.Menu>
       </S.Wrapper>
     </S.Nav>
   )
 }
-
-export const Menu = ({ menuOpen }) => [
-  tw`
-    md:flex
-    space-y-2
-    md:space-y-0
-    md:space-x-4
-    mt-4
-    md:mt-0
-  `,
-  menuOpen ? tw`block` : tw`hidden`
-]

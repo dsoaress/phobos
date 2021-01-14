@@ -56,6 +56,7 @@ export default {
     deleteButton: 'Excluir',
     previewButton: 'Preview',
     saveButton: 'Salvar',
+    saveButtonLoading: 'Salvando',
     title: 'Título da publicação',
     date: 'Data da publicação',
     status: 'Status da publicação',

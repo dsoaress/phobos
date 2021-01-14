@@ -1,4 +1,4 @@
-import tw from 'twin.macro'
+import tw, { styled } from 'twin.macro'
 
 export const Nav = tw.nav`bg-gray-800`
 
@@ -32,6 +32,18 @@ export const MenuToggle = tw.button`
   focus:ring-white
 `
 
+export const Menu = styled.div(({ menuOpen }) => [
+  tw`
+    md:flex
+    space-y-2
+    md:space-y-0
+    md:space-x-4
+    mt-4
+    md:mt-0
+  `,
+  menuOpen ? tw`block` : tw`hidden`
+])
+
 export const NavLink = tw.a`
   text-gray-300
   hover:bg-gray-700
@@ -46,7 +58,7 @@ export const NavLink = tw.a`
 `
 
 export const Logout = tw.div`
-  py-2
+  pt-4
   md:p-0
   border-t
   border-gray-700

@@ -12,6 +12,9 @@ export const Wrapper = tw.div`
   text-gray-500
   font-normal
   leading-8
+  focus:outline-none
+  focus:border-2
+  focus:border-indigo-500
 `
 
 export const Main = tw.div`
