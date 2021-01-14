@@ -3,7 +3,6 @@ import tw, { styled } from 'twin.macro'
 export const Nav = tw.nav`bg-gray-800`
 
 export const Wrapper = tw.div`
-  container
   md:flex
   items-center
   justify-between

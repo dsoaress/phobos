@@ -1,10 +1,10 @@
 import useSWR from 'swr'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import tw from 'twin.macro'
 
 import Layout from '@/components/Layout'
 import Subheader from '@/components/Subheader'
+import Container from '@/components/Container'
 import ItemsList from '@/components/ItemsList'
 import fetcher from '@/lib/fetch'
 import locales from '@/locales'
@@ -18,7 +18,7 @@ export default function Sections(props) {
   return (
     <Layout>
       <Subheader title={t.sectionsPage} />
-      <div css={[tw`container`]}>{data && <ItemsList data={data.pages} />}</div>
+      <Container>{data && <ItemsList data={data.pages} />}</Container>
     </Layout>
   )
 }

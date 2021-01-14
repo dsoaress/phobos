@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import axios from 'axios'
-import tw from 'twin.macro'
 
 import Layout from '@/components/Layout'
 import Subheader from '@/components/Subheader'
+import Container from '@/components/Container'
 import Button from '@/components/Button'
 import Link from '@/components/Link'
 import ItemsList from '@/components/ItemsList'
@@ -29,7 +29,7 @@ export default function Blog(props) {
           <Button label={t.blogPage.buttonLabel} small />
         </Link>
       </Subheader>
-      <div css={[tw`container`]}>{data && <ItemsList data={data.posts} />}</div>
+      <Container>{data && <ItemsList data={data.posts} />}</Container>
     </Layout>
   )
 }

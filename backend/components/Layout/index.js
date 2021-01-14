@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import tw from 'twin.macro'
 
 import Meta from '@/components/Meta'
 import Header from '@/components/Header'
@@ -9,8 +10,6 @@ import SpinnerScreen from '@/components/SpinnerScreen'
 import { useCurrentUser } from '@/hooks'
 
 import locales from '@/locales'
-
-import * as S from './styled'
 
 export default function Layout({ children }) {
   const router = useRouter()
@@ -50,7 +49,9 @@ export default function Layout({ children }) {
     <>
       <Meta />
       <Header />
-      <S.Main>{routeLoading ? <SpinnerScreen /> : children}</S.Main>
+      <main css={[tw`pb-20`]}>
+        {routeLoading ? <SpinnerScreen /> : children}
+      </main>
       <Footer />
     </>
   )

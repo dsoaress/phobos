@@ -1,7 +1,6 @@
 import tw from 'twin.macro'
 
 export const Form = tw.form`
-  container
   grid
   md:grid-cols-2
   md:gap-8

@@ -27,7 +27,6 @@ export const Content = styled.span(({ type }) => [
     text-center
     p-4
     border
-    max-w-screen-lg
     mx-auto
   `,
   type === 'danger' && tw`border-red-200 bg-red-100 text-red-800`,

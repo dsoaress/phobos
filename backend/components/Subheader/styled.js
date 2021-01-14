@@ -10,7 +10,6 @@ export const Header = tw.header`
 `
 
 export const HeaderWrapper = tw.div`
-  container
   flex
   items-center
   justify-center
