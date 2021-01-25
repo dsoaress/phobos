@@ -1,4 +1,5 @@
 export * from './blog'
-export * from './pages'
+export * from './sections'
+export * from './seo'
 export * from './token'
-export * from './user'
+export * from './users'

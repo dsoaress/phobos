@@ -22,7 +22,7 @@ const ForgetPasswordPage = () => {
       email: e.currentTarget.email.value
     }
 
-    const res = await fetch('/api/user/password/reset', {
+    const res = await fetch('/api/users/password/reset', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)

@@ -1,26 +1,26 @@
 import { nanoid } from 'nanoid'
 
-export function findTokenByIdAndType(db, id, type) {
+export function findTokenByIdAndType(db, _id, type) {
   return db.collection('tokens').findOne({
-    _id: id,
+    _id,
     type
   })
 }
 
-export function findAndDeleteTokenByIdAndType(db, id, type) {
+export function findAndDeleteTokenByIdAndType(db, _id, type) {
   return db
     .collection('tokens')
-    .findOneAndDelete({ _id: id, type })
+    .findOneAndDelete({ _id, type })
     .then(({ value }) => value)
 }
 
-export function insertToken(db, { creatorId, type, expireAt }) {
+export function insertToken(db, { userId, type, expireAt }) {
   const securedTokenId = nanoid(32)
   return db
     .collection('tokens')
     .insertOne({
       _id: securedTokenId,
-      creatorId,
+      userId,
       type,
       expireAt
     })

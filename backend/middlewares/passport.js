@@ -1,6 +1,7 @@
 import passport from 'passport'
 import bcrypt from 'bcrypt'
 import { Strategy as LocalStrategy } from 'passport-local'
+
 import { findUserById, findUserByEmail } from '@/db'
 
 passport.serializeUser((user, done) => {
@@ -8,8 +9,8 @@ passport.serializeUser((user, done) => {
 })
 
 // passport#160
-passport.deserializeUser((req, id, done) => {
-  findUserById(req.db, id).then(
+passport.deserializeUser((req, _id, done) => {
+  findUserById(req.db, _id).then(
     user => done(null, user),
     err => done(err)
   )

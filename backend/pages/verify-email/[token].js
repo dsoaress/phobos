@@ -42,7 +42,7 @@ export async function getServerSideProps(ctx) {
 
   if (!deletedToken) return { props: { success: false } }
 
-  await updateUserById(ctx.req.db, deletedToken.creatorId, {
+  await updateUserById(ctx.req.db, deletedToken.userId, {
     emailVerified: true
   })
 

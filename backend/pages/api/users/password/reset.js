@@ -21,7 +21,7 @@ handler.post(async (req, res) => {
   }
 
   const token = await insertToken(req.db, {
-    creatorId: user._id,
+    userId: user._id,
     type: 'passwordReset',
     expireAt: new Date(Date.now() + 1000 * 60 * 20)
   })
@@ -59,7 +59,7 @@ handler.put(async (req, res) => {
     return
   }
   const password = await bcrypt.hash(req.body.password, 10)
-  await updateUserById(req.db, deletedToken.creatorId, { password })
+  await updateUserById(req.db, deletedToken.userId, { password })
   res.end('ok')
 })
 

@@ -14,7 +14,7 @@ export const Input = styled.input(() => [InputBase])
 
 export const Select = styled.select(() => [InputBase])
 
-export const Textarea = styled.textarea(() => [InputBase, tw`resize-none h-96`])
+export const Textarea = styled.textarea(() => [InputBase, tw`resize-none h-52`])
 
 const InputBase = css`
   ${tw`

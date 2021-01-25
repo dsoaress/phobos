@@ -61,9 +61,9 @@ export default function Header() {
                 {t.blogPage.title}
               </S.NavLink>
             </ActiveLink>
-            <ActiveLink activeClassName="active" href="/sections">
+            <ActiveLink activeClassName="active" href="/settings">
               <S.NavLink onClick={() => setMenuOpen(!menuOpen)}>
-                {t.sectionsPage}
+                {t.settingsPage}
               </S.NavLink>
             </ActiveLink>
             <S.Logout>

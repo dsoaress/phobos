@@ -1,4 +1,17 @@
 export default {
+  generic: {
+    name: 'Name',
+    email: 'Email',
+    password: 'Password',
+    editor: 'Editor',
+    imageTitle: 'Featured image',
+    imageDesc: 'Drag an image here or click to select a file',
+    admin: 'Administrator',
+    saveButton: 'Save',
+    saveButtonLoading: 'Saving',
+    cancel: 'Cancel',
+    edit: 'Edit'
+  },
   header: {
     menuToggle: 'Open main menu',
     logout: 'Logout'
@@ -69,5 +82,23 @@ export default {
     errorMessage: 'An error has occurred, please try again'
   },
   sectionsPage: 'Sections',
+  settingsPage: 'Settings',
+  seoSection: {
+    title: 'SEO',
+    message: 'Settings saved successfully...',
+    warningMessage: 'All fields are mandatory',
+    errorMessage: 'An error has occurred, please try again'
+  },
+  usersSection: {
+    title: 'Users',
+    buttonLabel: 'Create account',
+    signupSection: {
+      title: 'Unnamed user',
+      role: 'Role',
+      deleteButton: 'Delete user',
+      message: 'Account successfully created',
+      errorMessage: 'An email account already exists'
+    }
+  },
   footer: 'Developed by'
 }

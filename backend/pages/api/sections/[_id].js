@@ -1,14 +1,16 @@
 import nc from 'next-connect'
+
 import { all } from '@/middlewares'
-import { getSections } from '@/db'
+import { getSection } from '@/db'
 
 const handler = nc()
 handler.use(all)
 
 handler.get(async (req, res) => {
-  const sections = await getSections(req.db)
+  const _id = req.query._id
 
-  res.send({ sections })
+  const section = await getSection(req.db, { _id })
+  res.send({ section })
 })
 
 export default handler

@@ -1,28 +1,29 @@
 import tw from 'twin.macro'
 
-export const ItemsList = tw.div`space-x-4`
+export const ItemsList = tw.div`space-y-4`
+
+export const Title = tw.h2`text-lg font-bold`
 
 export const Wrapper = tw.div`
   rounded-md
-  shadow
-  border-b
-  border-gray-200
+  border
+  border-gray-300
   bg-white
   divide-y
-  divide-gray-200
+  divide-gray-300
 `
 
 export const Item = tw.div`
   flex
   items-center
   px-6
-  py-4
+  h-20
   space-x-4
   text-sm
   font-medium
 `
 
-export const Title = tw.div`flex-grow`
+export const ItemTitle = tw.div`flex-grow`
 
 export const TitleLink = tw.a`text-gray-800 cursor-pointer`
 

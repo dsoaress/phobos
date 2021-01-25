@@ -29,7 +29,7 @@ export function Select({ id, items, label, srOnly, ...props }) {
 export function Textarea({ id, label, srOnly, ...props }) {
   return (
     <div>
-      <Label {...srOnly} label={label} id={id} />
+      <Label srOnly={srOnly} label={label} id={id} />
       <S.Textarea id={id} name={id} placeholder={srOnly && label} {...props} />
     </div>
   )

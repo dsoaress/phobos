@@ -25,7 +25,7 @@ const ResetPasswordTokenPage = ({ valid, token }) => {
       token
     }
 
-    const res = await fetch('/api/user/password/reset', {
+    const res = await fetch('/api/users/password/reset', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)

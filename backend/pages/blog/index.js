@@ -16,12 +16,7 @@ export default function Blog(props) {
   const { locale } = router
   const t = locales[locale]
 
-  const { data } = useSWR(
-    '/api/blog',
-    fetcher,
-    { refreshInterval: 1000 },
-    { initialData: props.data }
-  )
+  const { data } = useSWR('/api/blog', fetcher, { initialData: props.data })
   return (
     <Layout>
       <Subheader title={t.blogPage.title}>
@@ -29,7 +24,11 @@ export default function Blog(props) {
           <Button label={t.blogPage.buttonLabel} small />
         </Link>
       </Subheader>
-      <Container>{data && <ItemsList data={data.posts} />}</Container>
+      <Container>
+        {data && (
+          <ItemsList data={data.posts} title="Posts" basePath="/blog/" />
+        )}
+      </Container>
     </Layout>
   )
 }

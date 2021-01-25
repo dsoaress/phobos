@@ -9,31 +9,40 @@ import locales from '@/locales'
 
 import * as S from './styled'
 
-export default function ItemsList({ data, title }) {
+export default function ItemsList({
+  basePath,
+  data,
+  title,
+  isSection = false
+}) {
   const router = useRouter()
   const { locale } = router
   const t = locales[locale]
 
   return (
     <S.ItemsList>
-      {title && <h2>{title}</h2>}
-      {data.length > 0 ? (
+      {title && <S.Title>{title}</S.Title>}
+      {data?.length > 0 ? (
         <S.Wrapper>
           {data.map(item => (
             <S.Item key={item._id}>
-              {item.image && <Thumbnail src={item.image} alt={item.title} />}
-              <S.Title>
-                <Link href={router.pathname + '/' + item._id}>
+              {!isSection && (
+                <Thumbnail
+                  src={item.image || '/assets/profilePicture.jpeg'}
+                  alt={item.title}
+                />
+              )}
+              <S.ItemTitle>
+                <Link href={basePath + item._id}>
                   <S.TitleLink>{item.title}</S.TitleLink>
                 </Link>
-                {(item.date || item.role) && (
-                  <S.Meta>
-                    {formatDate(item.date) || item.role}{' '}
-                    <Badge status={item.status} />
-                  </S.Meta>
-                )}
-              </S.Title>
-              <Link href={router.pathname + '/' + item._id}>
+                <S.Meta>
+                  {item.date && formatDate(item.date)}
+                  {item.role && item.role}{' '}
+                  {item.status && <Badge status={item.status} />}
+                </S.Meta>
+              </S.ItemTitle>
+              <Link href={basePath + item._id}>
                 <S.EditLink>{t.listComponent.edit}</S.EditLink>
               </Link>
             </S.Item>
