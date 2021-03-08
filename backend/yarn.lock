@@ -600,7 +600,7 @@ argparse@^1.0.7:
   dependencies:
     sprintf-js "~1.0.2"
 
-asn1.js@^5.2.0:
+asn1.js@^5.2.0, asn1.js@^5.4.1:
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/asn1.js/-/asn1.js-5.4.1.tgz#11a980b84ebb91781ce35b0fdc2ee294e3783f07"
   integrity sha512-+I//4cYPccV8LdmBLiX8CYvf9Sp3vQsrqu2QNXRcrbiWvcx/UdlFiqUJJzxRQxgsZmvhXhn4cSKeSmoFjVdupA==
@@ -1120,12 +1120,14 @@ concat-stream@^1.5.2:
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
 
-connect-mongo@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/connect-mongo/-/connect-mongo-3.2.0.tgz#20f776c7f2a9d8144fc76cfdcbf33edb05eb4d52"
-  integrity sha512-0Mx88079Z20CG909wCFlR3UxhMYGg6Ibn1hkIje1hwsqOLWtL9HJV+XD0DAjUvQScK6WqY/FA8tSVQM9rR64Rw==
+connect-mongo@^4.0.0:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/connect-mongo/-/connect-mongo-4.2.2.tgz#2fe82250b34c29c31cdf4f379b6ded2375bae8b8"
+  integrity sha512-HueEAPZoeGpzbfLTHBXSs6SwNZv275nz3Kxyak5aT+RlBz8/ljTw0wO1f3NwjWxkJdBd12mVb7/aYopS7tzq4A==
   dependencies:
-    mongodb "^3.1.0"
+    debug "^4.3.1"
+    kruptein "^3.0.0"
+    mongodb "3.6.3"
 
 console-browserify@^1.1.0:
   version "1.2.0"
@@ -1295,7 +1297,7 @@ debug@2, debug@2.6.9:
   dependencies:
     ms "2.0.0"
 
-debug@4, debug@^4.1.0, debug@^4.1.1:
+debug@4, debug@^4.1.0, debug@^4.1.1, debug@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
   integrity sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
@@ -2050,6 +2052,13 @@ kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
+kruptein@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/kruptein/-/kruptein-3.0.0.tgz#9a7960248c9758f1e75522d2b87b8388bd40874f"
+  integrity sha512-Fh5sIb+3XI9L12GsgeBQqXVRPLB1HVViKSUkqPPOcqTEX4NwoF8Z3pEfMSl3Psd1j+QlloV8Uxxwp4gk3aFBGA==
+  dependencies:
+    asn1.js "^5.4.1"
+
 ky-universal@^0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/ky-universal/-/ky-universal-0.8.2.tgz#edc398d54cf495d7d6830aa1ab69559a3cc7f824"
@@ -2289,7 +2298,20 @@ modern-normalize@^1.0.0:
   resolved "https://registry.yarnpkg.com/modern-normalize/-/modern-normalize-1.0.0.tgz#539d84a1e141338b01b346f3e27396d0ed17601e"
   integrity sha512-1lM+BMLGuDfsdwf3rsgBSrxJwAZHFIrQ8YR61xIqdHo0uNKI9M52wNpHSrliZATJp51On6JD0AfRxd4YGSU0lw==
 
-mongodb@^3.1.0, mongodb@^3.6.3:
+mongodb@3.6.3:
+  version "3.6.3"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.6.3.tgz#eddaed0cc3598474d7a15f0f2a5b04848489fd05"
+  integrity sha512-rOZuR0QkodZiM+UbQE5kDsJykBqWi0CL4Ec2i1nrGrUI3KO11r6Fbxskqmq3JK2NH7aW4dcccBuUujAP0ERl5w==
+  dependencies:
+    bl "^2.2.1"
+    bson "^1.1.4"
+    denque "^1.4.1"
+    require_optional "^1.0.1"
+    safe-buffer "^5.1.2"
+  optionalDependencies:
+    saslprep "^1.0.0"
+
+mongodb@^3.6.3:
   version "3.6.4"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.6.4.tgz#ca59fd65b06831308262372ef9df6b78f9da97be"
   integrity sha512-Y+Ki9iXE9jI+n9bVtbTOOdK0B95d6wVGSucwtBkvQ+HIvVdTCfpVRp01FDC24uhC/Q2WXQ8Lpq3/zwtB5Op9Qw==
